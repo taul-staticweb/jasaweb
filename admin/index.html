@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — Kelola Toko</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Space Grotesk','sans-serif']},boxShadow:{neu:'4px 4px 0 #000','neu-sm':'2px 2px 0 #000'}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  body{font-family:'Space Grotesk',sans-serif;min-height:100vh;}
+  @keyframes spin{to{transform:rotate(360deg)}} .spin{animation:spin .8s linear infinite;}
+</style>
+</head>
+<body class="bg-[#0a1645] text-white">
+
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useCallback } = React;
+
+/* ── Label mapping ── */
+const LM = {
+  brand_name:'Nama Brand / Toko', logo_url:'URL Logo', wa_number:'Nomor WhatsApp',
+  wa_greeting:'Pesan Pembuka WA', color_accent:'Warna Aksen (hex, contoh: #0eeef7)',
+  color_bg:'Warna Latar Halaman (hex)', color_text:'Warna Teks Utama (hex)',
+  color_surface:'Warna Kartu / Panel (hex)', color_secondary:'Warna Sekunder (hex)',
+  color_border:'Warna Border (hex)', hero_title:'Judul Utama Halaman',
+  hero_subtitle:'Tagline / Deskripsi di bawah judul', hero_image:'URL Gambar Banner',
+  footer_text:'Teks Footer', seo_title:'Judul Tab Browser',
+  ig_url:'Link Instagram', tiktok_url:'Link TikTok', shopee_url:'Link Shopee',
+  facebook_url:'Link Facebook', youtube_url:'Link YouTube',
+};
+const EXCLUDED = ['panduan','Panduan','PANDUAN'];
+const SKIP_BRAND_KEYS = ['key','value','kunci','nilai','kolom','kolom_a','kolom_b'];
+const SHEET_DISPLAY = {brand:'Brand',data:'Produk',testimonial:'Testimoni',faq:'FAQ'};
+const KEY_INFO = {
+  seo_title:'Judul toko yang muncul di tab browser dan saat link dibagikan ke Google/Sosmed.',
+  seo_description:'Teks deskripsi pendek yang muncul di bawah judul saat link dikirim di WhatsApp atau tampil di halaman pencarian Google.',
+  seo_keywords:'Kata kunci pencarian agar toko mudah ditemukan di Google. Pisahkan dengan tanda koma.',
+  favicon_url:'Link gambar ikon kecil (biasanya logo) yang muncul di samping judul tab Chrome.',
+  og_image_url:'Link gambar thumbnail (rasio 16:9) yang muncul membesar saat link dikirim di WhatsApp, Telegram, atau Facebook.',
+  wa_greeting:'Kata sapaan bawaan saat customer mengklik "Beli via WA".',
+  catatan:'Teks langkah order. Gunakan <br> untuk baris baru, <b>...</b> untuk teks tebal.',
+};
+
+const getType = k => {
+  const l = k.toLowerCase();
+  if (/harga|price/.test(l)) return 'number';
+  if (/url|link|foto|logo|image/.test(l)) return 'url';
+  if (/deskripsi|desc|isi|jawaban|subtitle|catatan|info_body/.test(l)) return 'textarea';
+  if (/stok/.test(l)) return 'select-stok';
+  if (/color|warna/.test(l)) return 'color-hex';
+  return 'text';
+};
+
+const autoResize = e => { e.target.style.height='auto'; e.target.style.height=e.target.scrollHeight+'px'; };
+const AutoTextarea = ({value,onChange,className,rows,...rest}) => {
+  const ref = React.useRef(null);
+  React.useEffect(()=>{ if(ref.current){ref.current.style.height='auto';ref.current.style.height=ref.current.scrollHeight+'px';} },[value]);
+  return <textarea ref={ref} value={value} onChange={e=>{onChange(e);autoResize(e);}} className={className} rows={rows||1} style={{overflow:'hidden',resize:'none'}} {...rest}/>;
+};
+
+const makeAPI = url => ({
+  get: p => fetch(`${url}?${new URLSearchParams(p)}`).then(r => r.json()),
+  post: b => fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(b)}).then(r=>r.json()),
+});
+
+function Spinner() { return <div className="w-5 h-5 border-4 border-[#0eeef7] border-t-transparent rounded-full spin mx-auto"/>; }
+
+function Toast({msg,ok}) {
+  if(!msg) return null;
+  return <div className={`fixed top-4 right-4 z-50 px-4 py-3 rounded-xl border-2 border-black shadow-neu font-bold text-sm text-black max-w-xs ${ok?'bg-green-300':'bg-red-300'}`}>{ok?'✅':'❌'} {msg}</div>;
+}
+
+function FieldInput({fKey,type,value,onChange}) {
+  const cls="w-full border-2 border-black rounded-lg px-3 py-2 text-sm bg-white text-black focus:outline-none shadow-neu-sm";
+  if(type==='textarea') return <AutoTextarea value={value||''} onChange={e=>onChange(fKey,e.target.value)} className={cls} rows={fKey==='catatan'?8:3}/>;
+  if(type==='select-stok') return <select value={value||''} onChange={e=>onChange(fKey,e.target.value)} className={cls}>
+    {['','Tersedia','Habis','Segera'].map(o=><option key={o}>{o||'-- Pilih --'}</option>)}
+  </select>;
+  if(type==='color-hex') return <div className="flex gap-2 items-center">
+    <input type="color" value={/^#[0-9a-f]{6}$/i.test(value)?value:'#000000'} onChange={e=>onChange(fKey,e.target.value)} className="w-10 h-10 border-2 border-black rounded cursor-pointer shrink-0"/>
+    <AutoTextarea value={value||''} onChange={e=>onChange(fKey,e.target.value)} placeholder="#000000" className={`${cls} flex-1`} rows={1}/>
+  </div>;
+  if(type==='number') return <input type="number" value={value||''} onChange={e=>onChange(fKey,e.target.value)} className={cls}/>;
+  return <AutoTextarea value={value||''} onChange={e=>onChange(fKey,e.target.value)} className={cls} rows={1}/>;
+}
+
+/* ── LOGIN ── */
+function Login({onLogin}) {
+  const [apiKey,setApiKey] = useState('');
+  const [loading,setLoading] = useState(false);
+  const [err,setErr] = useState('');
+
+  const masuk = async () => {
+    const url = apiKey.trim();
+    if(!url){setErr('Masukkan API Key terlebih dahulu.');return;}
+    setLoading(true);setErr('');
+    try {
+      const api = makeAPI(url);
+      const res = await api.get({type:'branding'});
+      if(typeof res!=='object'||Array.isArray(res)) throw new Error('API Key tidak valid.');
+      const vals = Object.values(res);
+      const isUnified = vals.length>0 && vals.some(v=>typeof v==='object'&&v!==null);
+      onLogin(api, res, isUnified);
+    } catch(e){setErr('Gagal terhubung: '+(e.message||'API Key salah atau GAS belum di-deploy.'));}
+    setLoading(false);
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-[#0a1645]">
+      <div className="w-full max-w-sm">
+        <div className="text-center mb-8">
+          <div className="text-5xl mb-3">🔑</div>
+          <h1 className="text-3xl font-black uppercase">Admin Panel</h1>
+          <p className="text-white/50 text-sm mt-1">Masukkan Link Kunci untuk melanjutkan</p>
+        </div>
+        <div className="bg-white text-black border-4 border-[#0eeef7] rounded-2xl shadow-neu p-6 space-y-4">
+          <div>
+            <label className="block text-xs font-black uppercase mb-2 text-gray-500">Link Kunci</label>
+            <textarea value={apiKey} onChange={e=>setApiKey(e.target.value)}
+              placeholder="https://script.google.com/macros/s/..."
+              className="w-full border-2 border-black rounded-lg px-3 py-2 text-xs bg-gray-50 focus:outline-none resize-none" rows={4}/>
+          </div>
+          {err && <div className="bg-red-100 border-2 border-red-400 rounded-lg px-3 py-2 text-red-700 text-xs font-bold">{err}</div>}
+          <button onClick={masuk} disabled={loading}
+            className="w-full bg-[#0eeef7] text-black border-2 border-black font-black uppercase py-3 rounded-xl shadow-neu text-sm disabled:opacity-50">
+            {loading?<Spinner/>:'🔓 Masuk'}
+          </button>
+        </div>
+        <p className="text-center text-white/30 text-xs mt-4">Link Kunci = link yang diberikan <span className="text-[#0eeef7] font-black">Taul StaticWeb</span> pada anda.</p>
+      </div>
+    </div>
+  );
+}
+
+/* ── BRANDING EDITOR ── */
+function BrandingEditor({api,onToast,initialData}) {
+  const [data,setData] = useState(initialData||{});
+  const [loading,setLoading] = useState(!initialData);
+  const [saving,setSaving] = useState(false);
+  const [tipKey,setTipKey] = useState(null);
+
+  useEffect(()=>{
+    if(initialData){setData(initialData);setLoading(false);return;}
+    api.get({type:'branding'}).then(d=>{setData(d);setLoading(false);}).catch(()=>setLoading(false));
+  },[initialData]);
+
+  const handle=(k,v)=>setData(p=>({...p,[k]:v}));
+  const save=async()=>{
+    setSaving(true);
+    try{const r=await api.post({action:'update_branding',data});onToast(r.message||'Tersimpan!',true);}
+    catch(e){onToast('Gagal: '+e.message,false);}
+    setSaving(false);
+  };
+
+  if(loading) return <div className="py-10"><Spinner/></div>;
+  const filtered = Object.entries(data).filter(([k])=>!SKIP_BRAND_KEYS.includes(k.toLowerCase()));
+
+  return (
+    <div className="space-y-3">
+      <div className="bg-blue-50 border-2 border-blue-400 rounded-xl p-3 text-sm text-black">
+        <p className="font-black">💡 Cara Edit Branding</p>
+        <p className="text-xs mt-1 text-blue-700">Nama pengaturan (biru) tidak bisa diubah. Isi nilai di bawahnya, lalu klik Simpan.</p>
+      </div>
+      {filtered.map(([k,v])=>(
+        <div key={k} className="bg-white border-2 border-black rounded-xl p-4 shadow-neu-sm">
+          <div className="flex items-center gap-1 mb-1">
+            <span className="text-[11px] font-black uppercase text-blue-600 tracking-wide">
+              {LM[k.toLowerCase()] || k.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}
+            </span>
+            {KEY_INFO[k.toLowerCase()] && (
+              <button onClick={()=>setTipKey(tipKey===k?null:k)}
+                className="text-[10px] text-blue-400 border border-blue-400 rounded-full w-4 h-4 flex items-center justify-center shrink-0 font-black hover:bg-blue-100 leading-none">?</button>
+            )}
+          </div>
+          {tipKey===k && (
+            <div className="text-xs text-blue-700 bg-blue-50 border border-blue-200 rounded-lg p-2 mb-2">{KEY_INFO[k.toLowerCase()]}</div>
+          )}
+          <FieldInput fKey={k} type={getType(k)} value={data[k]||''} onChange={handle}/>
+        </div>
+      ))}
+      <div className="sticky bottom-0 bg-[#f0f4ff] pt-2 pb-3">
+        <button onClick={save} disabled={saving}
+          className="w-full bg-[#0eeef7] text-black border-2 border-black font-black uppercase py-3 rounded-xl shadow-neu text-sm disabled:opacity-50">
+          {saving?<Spinner/>:'💾 Simpan Semua Perubahan'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ── SHEET EDITOR ── */
+function SheetEditor({api,sheetName,onToast,showConfirm,initialData}) {
+  const [sd,setSd]=useState({headers:[],rows:[]});
+  const [loading,setLoading]=useState(true);
+  const [vals,setVals]=useState({});
+  const [editRow,setEditRow]=useState(null);
+  const [showForm,setShowForm]=useState(false);
+  const [saving,setSaving]=useState(false);
+  const [search,setSearch]=useState('');
+
+  const load=useCallback(()=>{
+    setLoading(true);
+    if(initialData){
+      const arr=Array.isArray(initialData)?initialData:[];
+      const headers=arr.length>0?Object.keys(arr[0]):[];
+      const rows=arr.map((item,i)=>({_rowIndex:i+2,values:headers.map(h=>item[h]!=null?String(item[h]):'')}));
+      setSd({headers,rows});setLoading(false);return;
+    }
+    api.get({type:'data',sheet:sheetName}).then(d=>{setSd(d);setLoading(false);}).catch(()=>setLoading(false));
+  },[sheetName,initialData]);
+  useEffect(()=>{load();},[load]);
+
+  const openAdd=()=>{setEditRow(null);setVals({});setShowForm(true);};
+  const openEdit=row=>{const v={};sd.headers.forEach((h,i)=>{v[h]=row.values[i]||'';});setEditRow(row._rowIndex);setVals(v);setShowForm(true);};
+  const hChange=(k,v)=>setVals(p=>({...p,[k]:v}));
+
+  const save=async()=>{
+    setSaving(true);
+    try{
+      const res=editRow
+        ?await api.post({action:'update',sheet:sheetName,rowIndex:editRow,data:vals})
+        :await api.post({action:'add',sheet:sheetName,data:vals});
+      onToast(res.message||'Tersimpan!',res.success!==false);
+      setShowForm(false);load();
+    }catch(e){onToast('Gagal: '+e.message,false);}
+    setSaving(false);
+  };
+
+  const del=async ri=>{
+    const ok=await showConfirm('Yakin ingin menghapus data ini?');
+    if(!ok)return;
+    try{const r=await api.post({action:'delete',sheet:sheetName,rowIndex:ri});onToast(r.message||'Dihapus!',r.success!==false);load();}
+    catch(e){onToast('Gagal menghapus.',false);}
+  };
+
+  if(loading) return <div className="py-10"><Spinner/></div>;
+
+  const filteredRows = search
+    ? sd.rows.filter(row=>sd.headers.slice(0,4).some((h,j)=>(row.values[j]||'').toLowerCase().includes(search.toLowerCase())))
+    : sd.rows;
+
+  return (
+    <div>
+      {showForm && (
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-end md:items-center justify-center p-4">
+          <div className="bg-white text-black border-2 border-black rounded-2xl shadow-neu w-full max-w-md max-h-[90vh] flex flex-col">
+            <div className="flex items-center justify-between p-4 border-b-2 border-black">
+              <h3 className="font-black uppercase">{editRow?'Edit Data':'Tambah Baru'}</h3>
+              <button onClick={()=>setShowForm(false)} className="font-black text-xl">✕</button>
+            </div>
+            <div className="flex-1 overflow-y-auto p-4 space-y-3">
+              {sd.headers.map(h=>(
+                <div key={h}>
+                  <label className="block text-[11px] font-black uppercase text-blue-600 mb-1">{LM[h.toLowerCase()]||h}</label>
+                  <FieldInput fKey={h} type={getType(h)} value={vals[h]||''} onChange={hChange}/>
+                </div>
+              ))}
+            </div>
+            <div className="p-4 border-t-2 border-black flex gap-2">
+              <button onClick={()=>setShowForm(false)} className="flex-1 border-2 border-black font-black py-2 rounded-xl text-sm text-black bg-white">Batal</button>
+              <button onClick={save} disabled={saving} className="flex-1 bg-[#0eeef7] text-black border-2 border-black font-black py-2 rounded-xl shadow-neu text-sm disabled:opacity-50">
+                {saving?<Spinner/>:'💾 Simpan'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="flex gap-2 mb-4">
+        <button onClick={openAdd} className="bg-[#0eeef7] text-black border-2 border-black font-black uppercase px-4 py-2 rounded-xl shadow-neu text-sm shrink-0">+ Tambah</button>
+        <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="🔍 Cari data..."
+          className="flex-1 border-2 border-black rounded-xl px-3 py-2 text-sm bg-white text-black focus:outline-none shadow-neu-sm"/>
+      </div>
+
+      {filteredRows.length===0
+        ?<div className="text-center py-10 bg-white text-black rounded-xl border-2 border-black">
+          <div className="text-4xl mb-2">{search?'🔍':'📭'}</div>
+          <p className="font-bold">{search?`Tidak ada hasil untuk "${search}"`:(`Belum ada data di sheet "${sheetName}"`)}</p>
+        </div>
+        :<div className="space-y-3">
+          {filteredRows.map((row,i)=>(
+            <div key={i} className="border-2 border-black rounded-xl p-3 bg-white text-black shadow-neu-sm">
+              {sd.headers.slice(0,4).map((h,j)=>(
+                <div key={h} className="flex gap-2 text-xs mb-1">
+                  <span className="font-black text-gray-400 w-28 shrink-0 truncate">{LM[h.toLowerCase()]||h}:</span>
+                  <span className="truncate flex-1">{row.values[j]||'—'}</span>
+                </div>
+              ))}
+              {sd.headers.length>4&&<p className="text-[10px] text-gray-400">+{sd.headers.length-4} kolom lain</p>}
+              <div className="flex gap-2 mt-3">
+                <button onClick={()=>openEdit(row)} className="flex-1 border-2 border-black font-black text-xs py-2 rounded-lg shadow-neu-sm">✏ Edit</button>
+                <button onClick={()=>del(row._rowIndex)} className="flex-1 border-2 border-red-400 text-red-500 font-black text-xs py-2 rounded-lg">🗑 Hapus</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      }
+    </div>
+  );
+}
+
+
+/* ── PANDUAN ── */
+function Panduan() {
+  const A=({href,children})=><a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline">{children}</a>;
+  const items=[
+    ['🔑','Link untuk mengakses halaman ini adalah kunci untuk mengelola web anda. Jaga kerahasiaannya, siapapun yang tahu URL ini bisa mengelola data toko.'],
+    ['🎨','Edit warna di tab "Brand". Gunakan color picker atau ketik kode hex. Klik "Simpan Semua Perubahan" setelah selesai.'],
+    ['📦','Tambah/edit produk di tab "Produk". Klik "+ Tambah" atau "✏ Edit" pada data yang ada. Gunakan kolom Cari untuk menemukan produk dengan cepat.'],
+    ['📸',<span>Foto produk harus berupa URL gambar publik dari internet (diawali https://). Upload ke <A href="https://imgbb.com">ImgBB.com</A> atau <A href="https://postimages.org">Postimages.org</A>, lalu salin Direct Link-nya.</span>],
+    ['⭐','Di tab Testimoni: isi nama pelanggan, bintang (1-5), isi ulasan, dan platform pembelian.'],
+    ['❓','Di tab FAQ: isi pertanyaan dan jawaban. Tampil sebagai accordion di halaman toko.'],
+    ['💾','Setiap perubahan HARUS diklik Simpan. Lalu refresh halaman toko untuk melihat hasilnya.'],
+    ['🙈','Menyembunyikan fitur: Jika tidak ingin pakai bagian tertentu (contoh: Bonus), cukup hapus isinya (biarkan sel kosong). Jangan hapus baris key-nya. Sistem akan otomatis menyembunyikan area yang kosong.'],
+    ['🖼️',<span>URL Gambar: Logo, foto produk, dan gambar lain harus diawali https://. Upload ke <A href="https://imgbb.com">ImgBB.com</A> atau <A href="https://postimages.org">Postimages.org</A> lalu salin Direct Link.</span>],
+    ['📐',<span>Foto Produk: Gunakan rasio 1:1 (persegi), minimal 600×600 px. Wajib compress di <A href="https://tinypng.com">TinyPNG.com</A> agar ukuran di bawah 150 KB supaya website tetap cepat.</span>],
+    ['⚡',<span>Optimasi Foto: Hindari foto mentah berukuran besar dari kamera. Compress dulu di <A href="https://tinypng.com">TinyPNG.com</A> (usahakan di bawah 150 KB per foto) agar website memuat sangat cepat.</span>],
+    ['💰','Format Harga: Pastikan isi dengan angka murni misal 150000 (tanpa titik atau Rp.).'],
+  ];
+  return (
+    <div className="space-y-3">
+      <div className="bg-yellow-100 border-2 border-yellow-500 rounded-xl p-4 text-black text-sm font-bold">
+        📌 Halaman ini hanya untuk pengelola toko. Jangan bagikan link admin ini ke pengunjung.
+      </div>
+      {items.map(([icon,text],i)=>(
+        <div key={i} className="bg-white text-black border-2 border-black rounded-xl p-4 shadow-neu-sm flex gap-3">
+          <span className="text-2xl shrink-0">{icon}</span>
+          <p className="text-sm leading-relaxed">{text}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+
+/* ── CONFIRM DIALOG ── */
+function ConfirmDialog({dlg,setDlg}) {
+  if(!dlg.open) return null;
+  const yes=()=>{setDlg({open:false,msg:'',resolve:null});dlg.resolve(true);};
+  const no=()=>{setDlg({open:false,msg:'',resolve:null});dlg.resolve(false);};
+  return (
+    <div className="fixed inset-0 bg-black/70 z-[200] flex items-center justify-center p-6">
+      <div className="bg-white text-black border-4 border-black rounded-2xl shadow-neu w-full max-w-xs p-6">
+        <div className="text-4xl text-center mb-3">🗑</div>
+        <p className="font-black text-center text-base mb-2">{dlg.msg}</p>
+        <p className="text-center text-xs text-gray-500 mb-5">Tindakan ini tidak bisa dibatalkan.</p>
+        <div className="flex gap-3">
+          <button onClick={no} className="flex-1 border-2 border-black font-black py-3 rounded-xl text-sm bg-white shadow-neu-sm">Batal</button>
+          <button onClick={yes} className="flex-1 bg-red-400 text-black border-2 border-black font-black py-3 rounded-xl shadow-neu text-sm">🗑 Hapus</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── MAIN APP ── */
+function App() {
+  const [session,setSession]=useState(null);
+  const [sheets,setSheets]=useState([]);
+  const [active,setActive]=useState('');
+  const [loadingSheets,setLoadingSheets]=useState(false);
+  const [toast,setToast]=useState({msg:'',ok:true});
+  const [confirmDlg,setConfirmDlg]=useState({open:false,msg:'',resolve:null});
+  const showConfirm=msg=>new Promise(r=>setConfirmDlg({open:true,msg,resolve:r}));
+
+  const showToast=(msg,ok)=>{setToast({msg,ok});setTimeout(()=>setToast({msg:'',ok:true}),3500);};
+
+  const handleLogin=(api,initialRes,isUnified)=>{
+    if(isUnified){
+      setSession({api,isUnified:true,fullData:initialRes});
+      const tabNames=Object.keys(initialRes);
+      setSheets(tabNames);setActive(tabNames[0]||'📖 Panduan');setLoadingSheets(false);
+    } else {
+      setSession({api,isUnified:false,fullData:null});
+      setLoadingSheets(true);
+      api.get({type:'sheets'})
+        .then(s=>{
+          const filtered=(Array.isArray(s)?s:Object.keys(s)).filter(x=>!EXCLUDED.includes(x));
+          setSheets(filtered);
+          setActive(filtered[0]||'📖 Panduan');
+        })
+        .catch(()=>setSheets([]))
+        .finally(()=>setLoadingSheets(false));
+    }
+  };
+
+  if(!session) return <Login onLogin={handleLogin}/>;
+
+  const tabs=[...sheets,'📖 Panduan'];
+
+  return (
+    <div className="min-h-screen bg-[#f0f4ff]">
+      <div className="bg-[#0a1645] text-white px-4 py-4 flex items-center justify-between border-b-4 border-[#0eeef7]">
+        <h1 className="font-black text-lg uppercase tracking-tight">⚙ Admin Panel</h1>
+        <div className="flex gap-2">
+          <a href="../index.html" className="text-xs border border-white/30 px-3 py-1 rounded-lg font-bold hover:bg-white/10">← Toko</a>
+          <button onClick={()=>setSession(null)} className="text-xs border border-red-400/50 text-red-300 px-3 py-1 rounded-lg font-bold hover:bg-red-900/30">Keluar</button>
+        </div>
+      </div>
+
+      {loadingSheets?<div className="py-16"><Spinner/></div>:(
+        <>
+          <div className="flex overflow-x-auto gap-2 px-4 py-3 border-b-2 border-black bg-white sticky top-0 z-10">
+            {tabs.map(s=>(
+              <button key={s} onClick={()=>setActive(s)}
+                className={`shrink-0 px-4 py-2 text-xs font-black uppercase border-2 border-black rounded-xl shadow-neu-sm whitespace-nowrap ${active===s?'bg-[#0eeef7] text-black':'bg-white text-black'}`}>
+                {SHEET_DISPLAY[s]||s}
+              </button>
+            ))}
+          </div>
+          <div className="p-4 max-w-2xl mx-auto pb-20">
+            <h2 className="font-black text-xl uppercase mb-4 text-[#0a1645]" style={{textShadow:'3px 3px 0 #0eeef7'}}>{SHEET_DISPLAY[active]||active}</h2>
+            {active==='📖 Panduan'?<Panduan/>
+              :session.isUnified?(
+                (typeof session.fullData[active]==='object'&&!Array.isArray(session.fullData[active]))
+                  ?<BrandingEditor key={active} api={session.api} onToast={showToast} initialData={session.fullData[active]}/>
+                  :<SheetEditor key={active} api={session.api} sheetName={active} onToast={showToast} showConfirm={showConfirm} initialData={session.fullData[active]}/>
+              )
+              :active==='brand'||active==='Branding'?<BrandingEditor key={active} api={session.api} onToast={showToast}/>
+              :<SheetEditor key={active} api={session.api} sheetName={active} onToast={showToast} showConfirm={showConfirm}/>
+            }
+          </div>
+        </>
+      )}
+      <Toast msg={toast.msg} ok={toast.ok}/>
+      <ConfirmDialog dlg={confirmDlg} setDlg={setConfirmDlg}/>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
+</script>
+</body>
+</html>

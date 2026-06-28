@@ -1,0 +1,3067 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Taul StaticWeb - Jasa Pembuatan Website Profesional untuk UMKM. Kelola produk dari HP, cepat, dan murah.">
+    <meta name="keywords"
+        content="jasa website, website umkm, bikin web murah, Taul StaticWeb, jasa website murah, jasa website 100k">
+    <meta property="og:title" content="Taul StaticWeb - Jasa Pembuatan Website Profesional">
+    <meta property="og:description"
+        content="Ubah bisnismu menjadi profesional hari ini. Solusi website etalase instan, kelola lewat HP.">
+    <meta property="og:image" content="https://i.ibb.co.com/5xR4zwDG/logo-tanpa-nama.png">
+    <meta property="og:type" content="website">
+    <title>Taul StaticWeb - Jasa Pembuatan Website Profesional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-default: #0a1645;
+            --color-accent: #0eeef7;
+            --color-secondary: #126bdd;
+            --color-light-bg: #f0f4ff;
+            --color-light-surface: #ffffff;
+            --color-dark-bg: #0a1645;
+            --color-dark-text: #0eeef7;
+            --color-red: #ff3b30;
+            --border-width: 3px;
+            --shadow-offset: 6px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-light-bg);
+            color: var(--color-default);
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: var(--color-accent) rgba(10, 22, 69, 0.12);
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 22, 69, 0.08);
+            border-radius: 999px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--color-accent), var(--color-secondary));
+            border-radius: 999px;
+            border: 3px solid rgba(255, 255, 255, 0.35);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent);
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .neu-card {
+            background: var(--color-light-surface);
+            border: var(--border-width) solid var(--color-default);
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-default);
+            border-radius: 8px;
+            padding: 30px;
+            transition: transform 0.2s;
+        }
+
+        .neu-btn {
+            display: inline-block;
+            background: var(--color-accent);
+            color: var(--color-default);
+            font-weight: 900;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            padding: 16px 28px;
+            border: var(--border-width) solid var(--color-default);
+            box-shadow: 4px 4px 0 var(--color-default);
+            border-radius: 8px;
+            transition: all 0.1s ease;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .neu-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0 0 0 var(--color-default);
+        }
+
+        .neu-btn-secondary {
+            background: var(--color-secondary);
+            color: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0 var(--color-accent);
+        }
+
+        @keyframes floatLogo {
+            0% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-15px)
+            }
+
+            100% {
+                transform: translateY(0)
+            }
+        }
+
+        /* Hero illustration slider */
+        .hero-illus-slider {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            animation: floatLogo 4s ease-in-out infinite;
+            /* Mobile: pastikan slider tidak melampaui layar */
+            left: 0;
+            right: 0;
+        }
+        /* Default: semua slide tersembunyi, posisi absolute */
+        .hero-illus-slide {
+            width: 100%;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(40px) scale(0.92);
+            /* visibility delay = tunggu fade-out selesai */
+            transition:
+                opacity     0.75s ease,
+                transform   0.75s cubic-bezier(0.25,0.46,0.45,0.94),
+                visibility  0s    0.75s;
+            pointer-events: none;
+        }
+        /* Slide PERTAMA tetap di normal flow agar container punya tinggi */
+        .hero-illus-slide:first-child {
+            position: relative;
+            left: auto;
+            right: auto;
+            transform: none;
+        }
+        /* Slide pertama saat aktif */
+        .hero-illus-slide:first-child.is-active {
+            transform: none;
+        }
+        /* Slide pertama saat keluar */
+        .hero-illus-slide:first-child.is-exiting {
+            transform: translateX(-40px) scale(0.92);
+        }
+        /* Slide aktif: langsung terlihat (visibility delay = 0) */
+        .hero-illus-slide.is-active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0) scale(1);
+            pointer-events: auto;
+            transition:
+                opacity     0.75s ease,
+                transform   0.75s cubic-bezier(0.25,0.46,0.45,0.94),
+                visibility  0s    0s;
+        }
+        /* Slide keluar */
+        .hero-illus-slide.is-exiting {
+            opacity: 0;
+            transform: translateX(-40px) scale(0.92);
+        }
+        .hero-illustration { width: 100%; display: block; }
+
+        @keyframes jumpBounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-12px);
+            }
+
+            60% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .btn-bounce {
+            animation: jumpBounce 2s infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .desktop-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--color-dark-bg);
+            border-bottom: 2px solid rgba(14, 238, 247, 0.3);
+            z-index: 1000;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .logo img {
+            height: 35px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 700;
+            font-size: 0.92rem;
+            transition: color 0.25s;
+            position: relative;
+            padding: 4px 2px 6px;
+            letter-spacing: 0.01em;
+        }
+        /* Animated underline: expand from center on hover */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .nav-links a:hover { color: var(--color-accent); }
+        .nav-links a:hover::after { transform: scaleX(1); }
+        /* Tutorial: distinct CTA pill */
+        .nav-links a[href*="tutorial"] {
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+            padding: 4px 12px 4px;
+            font-weight: 800;
+            border-radius: 0;     /* tetap persegi neubrutalism */
+            transition: background 0.2s, color 0.2s, box-shadow 0.15s;
+            box-shadow: 2px 2px 0 var(--color-accent);
+        }
+        .nav-links a[href*="tutorial"]::after { display: none; }
+        .nav-links a[href*="tutorial"]:hover {
+            background: var(--color-accent);
+            color: var(--color-default);
+            box-shadow: 4px 4px 0 rgba(14,247,247,0.4);
+        }
+
+        /* Hamburger button (mobile only) */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Mobile dropdown menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background: var(--color-dark-bg);
+            border-bottom: 2px solid rgba(14, 238, 247, 0.3);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            flex-direction: column;
+            padding: 8px 0;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 24px;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 800;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--color-accent);
+        }
+
+        .mobile-menu a:active {
+            background: rgba(14, 238, 247, 0.1);
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 24px;
+            width: 58px;
+            height: 58px;
+            background: #25D366;
+            border: 3px solid var(--color-default);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 998;
+            box-shadow: 4px 4px 0 var(--color-default);
+            animation: jumpBounce 2s infinite;
+            text-decoration: none;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+
+        .whatsapp-float:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0 0 0 var(--color-default);
+            animation: none;
+        }
+
+        .whatsapp-float svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 106px;
+            right: 30px;
+            width: 46px;
+            height: 46px;
+            background: var(--color-accent);
+            border: 3px solid var(--color-default);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 998;
+            box-shadow: 3px 3px 0 var(--color-default);
+            text-decoration: none;
+            color: var(--color-default);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .scroll-to-top:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 var(--color-default);
+        }
+
+        .scroll-to-top:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0 var(--color-default);
+        }
+
+        .scroll-to-top svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--color-default);
+            fill: none;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* --- HERO BASE --- */
+        .hero {
+            padding: 30px 0 20px;
+            background: #0a1645;
+            /* fallback jika video belum load */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* --- VIDEO BACKGROUND --- */
+        .hero-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+            /* video 50% transparan */
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Default: tampilkan desktop video */
+        .hero-video-desktop {
+            display: block;
+        }
+
+        .hero-video-mobile {
+            display: none;
+        }
+
+        /* Di mobile: gambar di atas, teks di bawah */
+        .hero .container.hero-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-media {
+            order: -1;
+            /* gambar tampil duluan (di atas) */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .hero-copy {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 14px;
+            color: #ffffff;
+            text-shadow: 3px 3px 0 rgba(5, 10, 40, 0.8);
+            overflow-wrap: break-word;
+        }
+
+        .hero p {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            max-width: 560px;
+            margin: 0 auto 28px;
+            font-weight: 500;
+            overflow-wrap: break-word;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.82);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Social Proof Badge */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(14, 238, 247, 0.15);
+            border: 1.5px solid var(--color-accent);
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            letter-spacing: 0.03em;
+            margin-bottom: 16px;
+        }
+
+        .hero-badge::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(14, 238, 247, 0.25);
+            flex-shrink: 0;
+        }
+
+        /* CTA Button Override untuk Hero — dirancang untuk background gelap */
+        .hero-btns .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: var(--color-accent);
+            color: var(--color-default);
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            text-decoration: none;
+            border: 2px solid var(--color-accent);
+            border-radius: 6px;
+            box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.25);
+            transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.15s ease;
+            cursor: pointer;
+        }
+
+        .hero-btns .btn-primary:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 rgba(255, 255, 255, 0.35);
+            filter: brightness(1.1);
+        }
+
+        .hero-btns .btn-primary:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0 0 0 rgba(255, 255, 255, 0.25);
+        }
+
+        .hero-btns .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: transparent;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            text-decoration: none;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 6px;
+            box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.15);
+            transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease, border-color 0.15s ease;
+            cursor: pointer;
+        }
+
+        .hero-btns .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: white;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 rgba(255, 255, 255, 0.25);
+        }
+
+        .hero-btns .btn-outline:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0 0 0 rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- HERO TABLET (≥ 640px) --- */
+        @media (min-width: 640px) {
+            .hero {
+                padding: 50px 0 40px;
+            }
+
+            .hero-illustration {
+                max-width: 380px;
+            }
+        }
+
+        /* --- HERO DESKTOP (≥ 992px) --- */
+        @media (min-width: 992px) {
+            .hero {
+                min-height: calc(100vh - 80px);
+                padding: 60px 0;
+                display: flex;
+                align-items: center;
+            }
+
+            .hero .container.hero-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+                gap: 72px;
+            }
+
+            /* Reset mobile order */
+            .hero-media {
+                order: 0;
+                justify-content: center;
+            }
+
+            .hero-copy {
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .hero p {
+                margin: 0 0 28px;
+                max-width: 480px;
+            }
+
+            .hero-btns {
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+            }
+
+            .hero-btns .btn-primary,
+            .hero-btns .btn-outline {
+                white-space: nowrap;
+            }
+
+            /* Gambar mengisi tinggi penuh blok teks */
+            .hero-illustration {
+                width: 100%;
+                max-width: none;
+                max-height: 400px;
+                object-fit: contain;
+                margin: 0;
+            }
+        }
+
+        /* --- HERO WIDE DESKTOP (≥ 1200px) --- */
+        @media (min-width: 1200px) {
+            .hero .container.hero-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 80px;
+            }
+
+            .hero-illustration {
+                max-height: 460px;
+            }
+        }
+
+        /* --- FEATURE CARDS NEUBRUTALISM --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            align-items: stretch;  /* semua kolom tinggi sama */
+            padding: 16px 8px 24px;
+        }
+
+        .feature-card {
+            background: #fff;
+            border: 5px solid var(--color-default);
+            box-shadow: 12px 12px 0 var(--color-default);
+            padding: 32px 28px 28px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            display: flex;
+            flex-direction: column;  /* isi card tersebar vertikal */
+        }
+
+        /* Zig-zag rotation */
+        .feature-card:nth-child(1) {
+            transform: rotate(-2deg);
+        }
+
+        .feature-card:nth-child(2) {
+            transform: rotate(2deg);
+        }
+
+        .feature-card:nth-child(3) {
+            transform: rotate(-2deg);
+        }
+
+        .feature-card:hover {
+            transform: rotate(0deg) scale(1.03);
+            box-shadow: 18px 18px 0 var(--color-default);
+        }
+
+        /* Diagonal banner top-right */
+        .feature-banner {
+            position: absolute;
+            top: 18px;
+            right: -42px;
+            background: var(--color-default);
+            color: var(--color-accent);
+            padding: 7px 0;
+            width: 160px;
+            text-align: center;
+            transform: rotate(45deg);
+            font-weight: 900;
+            font-size: 0.6rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            pointer-events: none;
+        }
+
+        /* SVG icon neubrutalism */
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            background: var(--color-accent);
+            border: 3px solid var(--color-default);
+            box-shadow: 4px 4px 0 var(--color-default);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--color-default);
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--color-default);
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--color-default);
+            display: inline-block;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #334155;
+            font-weight: 500;
+            margin-top: 12px;
+            flex-grow: 1;  /* dorong paragraf agar mengisi sisa ruang */
+        }
+
+        /* Fade-in khusus feature card — hanya opacity, tidak konflik dengan rotate */
+        .card-reveal {
+            opacity: 0;
+            transition: opacity 0.7s ease-out;
+        }
+        .card-reveal.active {
+            opacity: 1;
+        }
+
+        /* --- PORTFOLIO CAROUSEL 3D COVERFLOW --- */
+        #portofolio {
+            background: var(--color-light-bg);
+            height: calc(100vh - 80px);
+            min-height: 560px;  /* agar card tidak terlalu kecil di laptop */
+            display: flex;
+            flex-direction: column;
+            padding: 36px 0 16px;
+        }
+        .porto-subtitle {
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #64748b;
+            margin-top: -30px;
+            margin-bottom: 20px;
+            letter-spacing: 0.02em;
+        }
+        /* Clip wrapper: mengisi sisa tinggi section */
+        .porto-clip-wrapper {
+            overflow: hidden;
+            flex: 1;           /* ambil sisa ruang setelah judul & nav */
+            min-height: 0;     /* penting agar flex child bisa menyusut */
+        }
+        .porto-stage {
+            perspective: 900px;
+            perspective-origin: 50% 50%;
+            height: 100%;      /* ikuti tinggi clip-wrapper */
+            position: relative;
+            cursor: pointer;
+        }
+        .porto-track {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .porto-card {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            /* width & height di-set dinamis oleh JS sesuai ukuran stage */
+            border: 4px solid var(--color-default);
+            display: block;
+            text-decoration: none;
+            overflow: hidden;
+            background: var(--color-default);
+            transition:
+                transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity   0.6s ease,
+                filter    0.6s ease,
+                box-shadow 0.6s ease;
+            will-change: transform, opacity, filter;
+        }
+        .porto-card.is-active {
+            box-shadow: 10px 10px 0 var(--color-default);
+        }
+        .porto-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        /* Gradient overlay bawah */
+        .porto-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 52px 20px 22px;
+            background: linear-gradient(to top, rgba(10,22,69,0.96) 0%, rgba(10,22,69,0.55) 55%, transparent 100%);
+            pointer-events: none;
+        }
+        .porto-overlay h4 {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+            border-left: 3px solid var(--color-accent);
+            padding-left: 10px;
+        }
+        .porto-overlay p {
+            color: rgba(255,255,255,0.72);
+            font-size: 0.8rem;
+            font-weight: 500;
+            line-height: 1.4;
+            padding-left: 13px;
+        }
+        .porto-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 16px;
+            flex-shrink: 0;
+        }
+        .porto-btn {
+            width: 46px; height: 46px;
+            background: var(--color-accent);
+            border: 3px solid var(--color-default);
+            box-shadow: 4px 4px 0 var(--color-default);
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--color-default);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            flex-shrink: 0;
+        }
+        .porto-btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--color-default); }
+        .porto-btn:active { transform: translate(4px,4px); box-shadow: 0 0 0 var(--color-default); }
+        .porto-dots { display: flex; gap: 8px; align-items: center; }
+        .porto-dot {
+            width: 10px; height: 10px;
+            background: rgba(10,22,69,0.18);
+            border: 2px solid var(--color-default);
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .porto-dot.active { background: var(--color-accent); transform: scale(1.3); }
+        @media (max-width: 768px) {
+            #portofolio { height: calc(100dvh - 60px); } /* 60px = tinggi navbar mobile */
+        }
+
+        /* --- TESTIMONIAL STAGGER CAROUSEL --- */
+        #testimoni {
+            background: var(--color-light-surface);
+            height: calc(100vh - 80px);
+            min-height: 540px;
+            display: flex;
+            flex-direction: column;
+            padding: 36px 0 0;
+            overflow: hidden;
+            border-top: var(--border-width) solid var(--color-default);
+        }
+        .testi-stage {
+            flex: 1;
+            min-height: 0;
+            position: relative;
+        }
+        /* Card: posisi absolut di tengah stage */
+        .testi-card {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            cursor: pointer;
+            border: 4px solid var(--color-default);
+            padding: 24px;
+            /* clip-path & transition di-set JS */
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        opacity   0.5s ease,
+                        box-shadow 0.5s ease;
+        }
+        /* Center card: dark neubrutalism */
+        .testi-card.is-center {
+            background: var(--color-default);
+            box-shadow: 8px 8px 0 var(--color-accent);
+        }
+        /* Side cards: light */
+        .testi-card:not(.is-center) {
+            background: #fff;
+            box-shadow: none;
+        }
+        /* Cut-corner diagonal fold line */
+        .testi-cut-line {
+            position: absolute;
+            right: -2px;
+            height: 3px;
+            transform-origin: top right;
+            transform: rotate(45deg);
+            display: block;
+            transition: background 0.5s;
+        }
+        .testi-card.is-center  .testi-cut-line { background: var(--color-accent); }
+        .testi-card:not(.is-center) .testi-cut-line { background: var(--color-default); }
+        /* Foto testimoni */
+        .testi-photo {
+            display: block;
+            object-fit: cover;
+            object-position: top;
+            margin-bottom: 10px;
+            box-shadow: 3px 3px 0 var(--color-accent);
+        }
+        /* Kutipan */
+        .testi-quote {
+            font-weight: 800;
+            line-height: 1.45;
+            margin-bottom: 8px;
+            transition: color 0.5s;
+        }
+        .testi-card.is-center  .testi-quote { color: #fff; }
+        .testi-card:not(.is-center) .testi-quote { color: var(--color-default); }
+        /* Nama / atribusi */
+        .testi-attr {
+            position: absolute;
+            bottom: 18px;
+            left: 24px;
+            right: 24px;
+            font-style: italic;
+            font-weight: 500;
+            transition: color 0.5s;
+        }
+        .testi-card.is-center  .testi-attr { color: rgba(255,255,255,0.72); }
+        .testi-card:not(.is-center) .testi-attr { color: #64748b; }
+        /* Nav row */
+        .testi-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 0 20px;
+            flex-shrink: 0;
+        }
+        .testi-btn {
+            width: 52px; height: 52px;
+            background: #fff;
+            border: 3px solid var(--color-default);
+            box-shadow: 4px 4px 0 var(--color-default);
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--color-default);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s, box-shadow 0.1s, background 0.2s;
+        }
+        .testi-btn:hover {
+            background: var(--color-accent);
+            transform: translate(-2px,-2px);
+            box-shadow: 6px 6px 0 var(--color-default);
+        }
+        .testi-btn:active { transform: translate(4px,4px); box-shadow: 0 0 0 var(--color-default); }
+        @media (max-width: 768px) {
+            #testimoni { height: calc(100dvh - 60px); }
+        }
+
+        .pricing-section {
+            background: var(--color-dark-bg);
+            color: white;
+            border-top: var(--border-width) solid var(--color-default);
+            border-bottom: var(--border-width) solid var(--color-default);
+        }
+
+        .pricing-section .section-title {
+            text-shadow: 3px 3px 0 var(--color-secondary);
+        }
+
+        .pricing-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .price-card {
+            display: flex;
+            flex-direction: column;
+            color: var(--color-default);
+            flex: 1 1 450px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .price-card.featured {
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-accent);
+        }
+
+        .price-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .price-amount {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            color: var(--color-default);
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            border-bottom: 2px dashed rgba(10, 22, 69, 0.2);
+            font-weight: 600;
+            display: flex;
+            gap: 10px;
+        }
+
+        .features-list li::before {
+            content: '👉';
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .step-card {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--color-accent);
+            color: var(--color-default);
+            border: 3px solid var(--color-default);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin: 0 auto 20px;
+            box-shadow: 3px 3px 0 var(--color-default);
+        }
+
+        .step-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--color-light-surface);
+            border: var(--border-width) solid var(--color-default);
+            box-shadow: 4px 4px 0 var(--color-default);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .faq-summary {
+            padding: 20px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--color-light-surface);
+            list-style: none;
+        }
+
+        .faq-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--color-secondary);
+        }
+
+        details[open] .faq-summary::after {
+            content: '−';
+        }
+
+        .faq-content {
+            padding: 0 20px 20px;
+            font-weight: 500;
+            color: #334155;
+            line-height: 1.7;
+        }
+
+        footer {
+            background: var(--color-default);
+            color: white;
+            padding: 60px 0 40px;
+            text-align: center;
+            border-top: var(--border-width) solid var(--color-accent);
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: var(--color-light-surface);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: 0.2s;
+        }
+
+        .footer-links a:hover {
+            transform: translateY(-3px);
+            background: var(--color-accent);
+        }
+
+        .footer-links img {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Tema Tutorial banner */
+        .tutorial-banner {
+            background: var(--color-accent);
+            border: var(--border-width) solid var(--color-default);
+            border-radius: 8px;
+            padding: 20px 30px;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: 4px 4px 0 var(--color-default);
+        }
+
+        .tutorial-banner p {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: var(--color-default);
+        }
+
+        @media (max-width:768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .desktop-nav {
+                height: 60px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            /* Swap video source di mobile */
+            .hero-video-desktop {
+                display: none;
+            }
+
+            .hero-video-mobile {
+                display: block;
+            }
+
+            /* Hero mobile: isi penuh viewport */
+            .hero {
+                min-height: calc(100dvh - 60px);
+                display: flex;
+                align-items: center;
+                padding: 20px 0;
+            }
+
+            .hero .container {
+                width: 100%;
+            }
+
+            .hero-illustration {
+                max-width: 260px;
+            }
+
+            /* Sinkronkan lebar slider dengan gambar agar centering benar */
+            .hero-illus-slider {
+                max-width: 280px;
+                width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* CTA susun vertikal, lebar menyesuaikan teks */
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                width: 100%;
+            }
+
+            .hero-btns .btn-primary,
+            .hero-btns .btn-outline {
+                width: auto;
+                text-align: center;
+                padding: 13px 28px;
+                font-size: 0.92rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .features-grid,
+            .pricing-grid,
+            .workflow-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Batasi lebar card di mobile agar tidak meregang */
+            .features-grid {
+                justify-items: center;
+            }
+            .feature-card {
+                max-width: 400px;
+                width: 100%;
+            }
+
+            .step-card::after {
+                content: '↓';
+                display: block;
+                font-size: 2rem;
+                color: var(--color-secondary);
+                margin: 20px 0;
+            }
+
+            .step-card:last-child::after {
+                display: none;
+            }
+        }
+
+        /* --- TABLET (iPad Air: 769px – 991px) --- */
+        @media (min-width: 769px) and (max-width: 991px) {
+            /* 2 kolom, kartu ke-3 rata tengah */
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+                justify-items: center;
+            }
+            .feature-card:nth-child(3) {
+                grid-column: 1 / -1;
+                width: calc(50% - 16px);
+                transform: rotate(-2deg);
+            }
+            .feature-card:nth-child(3):hover {
+                transform: rotate(0deg) scale(1.02);
+            }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .workflow-grid { grid-template-columns: repeat(2,1fr); }
+        }
+        /* --- FOOTER PROFESIONAL --- */
+        footer#kontak {
+            background: var(--color-default);
+            border-top: 5px solid var(--color-accent);
+            color: white;
+        }
+        .footer-top { padding: 60px 0 48px; }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+        /* Kolom brand */
+        .footer-brand {
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            color: var(--color-accent);
+            margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+        .footer-tagline {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .footer-badge {
+            display: inline-block;
+            background: var(--color-accent);
+            color: var(--color-default);
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            padding: 5px 14px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        /* Kolom navigasi */
+        .footer-col-title {
+            font-size: 0.78rem;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+        }
+        .footer-nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer-nav-list a {
+            color: rgba(255,255,255,0.70);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s, padding-left 0.2s;
+            display: block;
+        }
+        .footer-nav-list a:hover {
+            color: var(--color-accent);
+            padding-left: 6px;
+        }
+        /* Kolom kontak */
+        .footer-contact-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+        .footer-contact-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.70);
+        }
+        .footer-icon { flex-shrink: 0; font-size: 1rem; }
+        .footer-contact-list a {
+            color: rgba(255,255,255,0.70);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-contact-list a:hover { color: var(--color-accent); }
+        /* Sosmed buttons */
+        .footer-socials {
+            display: flex;
+            gap: 10px;
+        }
+        .footer-social-btn {
+            width: 40px; height: 40px;
+            background: var(--color-accent);
+            border: 2px solid rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 3px 3px 0 rgba(255,255,255,0.15);
+        }
+        .footer-social-btn img { width: 18px; height: 18px; }
+        .footer-social-btn:hover {
+            transform: translate(-2px,-2px);
+            box-shadow: 5px 5px 0 rgba(255,255,255,0.2);
+        }
+        /* Bottom bar */
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 18px 0;
+        }
+        .footer-bottom-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.45);
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .footer-made { color: rgba(255,255,255,0.35); }
+        /* Footer responsive */
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .footer-top { padding: 40px 0 32px; }
+            .footer-bottom-inner { justify-content: center; text-align: center; }
+        }
+        /* Footer tablet: tetap 2 kolom */
+        @media (min-width: 769px) and (max-width: 991px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        /* Navbar: hamburger jika layar < 960px (tablet juga) */
+        @media (min-width: 769px) and (max-width: 960px) {
+            .nav-links  { display: none; }
+            .hamburger  { display: flex; }
+            .desktop-nav { height: 60px; }
+            body { padding-top: 60px; }
+            #portofolio { height: calc(100vh - 60px); }
+            #testimoni  { height: calc(100vh - 60px); }
+        }
+        /* ===== ENHANCED ANIMATIONS ===== */
+
+        /* Hero: stagger individual elements */
+        @keyframes heroFadeSlide {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        /* Hero-copy: snap visible instantly → children do stagger */
+        .hero-copy.reveal {
+            transition: opacity 0.01s !important;
+            transform: none !important;
+        }
+        .hero-copy.reveal.active { transform: none !important; }
+        .hero-copy.reveal.active .hero-badge {
+            animation: heroFadeSlide 0.5s cubic-bezier(0.25,0.46,0.45,0.94) 0.15s both;
+        }
+        .hero-copy.reveal.active h1 {
+            animation: heroFadeSlide 0.65s cubic-bezier(0.25,0.46,0.45,0.94) 0.32s both;
+        }
+        .hero-copy.reveal.active > p {
+            animation: heroFadeSlide 0.55s cubic-bezier(0.25,0.46,0.45,0.94) 0.52s both;
+        }
+        .hero-copy.reveal.active .hero-btns {
+            animation: heroFadeSlide 0.5s cubic-bezier(0.25,0.46,0.45,0.94) 0.68s both;
+        }
+        /* Hero media: direct CSS animation (tidak bergantung observer) */
+        @keyframes heroMediaDesktopIn {
+            from { opacity: 0; transform: translateX(35px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes heroMediaMobileIn {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-media {
+            animation: heroMediaDesktopIn 0.8s ease-out 0.4s both;
+        }
+        @media (max-width: 991px) {
+            .hero-media { animation-name: heroMediaMobileIn; }
+        }
+
+        /* Navbar scroll shrink */
+        .desktop-nav { transition: height 0.3s ease, box-shadow 0.3s ease, border-bottom-color 0.3s ease; }
+        .desktop-nav.scrolled {
+            height: 62px;
+            box-shadow: 0 4px 28px rgba(0,0,0,0.5);
+            border-bottom-color: rgba(14,238,247,0.65);
+        }
+        @media (max-width: 960px) { .desktop-nav.scrolled { height: 52px; } }
+
+        /* FAQ smooth accordion */
+        .faq-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            padding: 0 20px;
+            font-weight: 500;
+            color: #334155;
+            line-height: 1.7;
+            transition:
+                max-height 0.45s cubic-bezier(0.25,0.46,0.45,0.94),
+                opacity    0.35s ease,
+                padding    0.35s ease;
+        }
+        .faq-content.faq-open {
+            max-height: 500px;
+            opacity: 1;
+            padding: 4px 20px 20px;
+        }
+        /* FAQ indicator: + rotates to × smoothly */
+        .faq-summary::after {
+            display: inline-block;
+            transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), color 0.25s;
+            will-change: transform;
+        }
+        .faq-item.faq-open .faq-summary::after {
+            transform: rotate(45deg);
+        }
+
+        /* Step cards stagger */
+        .step-card.reveal:nth-child(2) { transition-delay: 0.12s; }
+        .step-card.reveal:nth-child(3) { transition-delay: 0.24s; }
+        .step-card.reveal:nth-child(4) { transition-delay: 0.36s; }
+
+        /* Pricing cards stagger */
+        .price-card.reveal:nth-child(2) { transition-delay: 0.15s; }
+        .price-card.reveal:nth-child(3) { transition-delay: 0.30s; }
+
+        /* Footer cols animate in */
+        .footer-col {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .footer-col.vis { opacity: 1; transform: translateY(0); }
+        .footer-col:nth-child(2) { transition-delay: 0.15s; }
+
+        /* Promo Popup Overlay */
+        .promo-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(10, 22, 69, 0.75); /* Warna biru gelap transparan */
+            backdrop-filter: blur(8px); /* Efek blur di belakang */
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .promo-popup-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .promo-popup-content {
+            position: relative;
+            width: 90%;
+            max-width: 420px; /* Lebar maksimal popup */
+            background: var(--color-light-surface); /* Latar belakang */
+            border: 4px solid var(--color-default);
+            border-radius: 24px; /* Sudut membulat */
+            box-shadow: 8px 8px 0px var(--color-accent); /* Shadow neubrutalism */
+            padding: 0;
+            overflow: visible;
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .promo-popup-overlay.show .promo-popup-content {
+            transform: scale(1);
+        }
+
+        .promo-popup-img {
+            width: 100%;
+            display: block;
+            border-radius: 20px;
+            object-fit: cover;
+            aspect-ratio: 1 / 1; /* Rasio 1:1 persegi */
+        }
+
+        /* Tombol Silang */
+        .promo-popup-close {
+            position: absolute;
+            top: -16px;
+            right: -16px;
+            width: 36px;
+            height: 36px;
+            background: white;
+            color: black;
+            border: 3px solid black;
+            border-radius: 50%;
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 2px 2px 0px black;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .promo-popup-close:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px black;
+        }
+
+        .promo-popup-close:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px black;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <nav class="desktop-nav" id="main-nav">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                Taul StaticWeb
+            </a>
+            <div class="nav-links">
+                <a href="#keunggulan">Keunggulan</a>
+                <a href="#portofolio">Portofolio</a>
+                <a href="#testimoni">Testimoni</a>
+                <a href="#layanan">Layanan</a>
+                <a href="#alur">Alur Kerja</a>
+                <a href="#faq">FAQ</a>
+                <a href="./tutorial_klien.html">Tutorial</a>
+            </div>
+            <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#keunggulan" class="menu-link">Keunggulan</a>
+        <a href="#portofolio" class="menu-link">Portofolio</a>
+        <a href="#testimoni" class="menu-link">Testimoni</a>
+        <a href="#layanan" class="menu-link">Layanan</a>
+        <a href="#alur" class="menu-link">Alur Kerja</a>
+        <a href="#faq" class="menu-link">FAQ</a>
+        <a href="./tutorial_klien.html" class="menu-link">Tutorial</a>
+    </div>
+
+    <section class="hero">
+        <!-- Video Background -->
+        <video class="hero-video hero-video-desktop" autoplay muted loop playsinline preload="none">
+            <source src="./bg-dekstop.webm" type="video/webm">
+        </video>
+        <video class="hero-video hero-video-mobile" autoplay muted loop playsinline preload="none">
+            <source src="./bg-mobile.webm" type="video/webm">
+        </video>
+
+        <div class="container hero-grid">
+            <div class="hero-copy reveal">
+                <div class="hero-badge">Siap Online dalam 24 Jam</div>
+                <h1>Digitalisasi Bisnismu,<br>Tanpa Bikin Pusing.</h1>
+                <p>Solusi website instan, desain premium, dan 100% dikelola semudah mengetik pesan di HP Anda.</p>
+                <div class="hero-btns">
+                    <a href="#layanan" class="btn-primary">Mulai Sekarang</a>
+                    <a href="#alur" class="btn-outline">Lihat Alur Kerja</a>
+                </div>
+            </div>
+            <div class="hero-media">
+                <div class="hero-illus-slider" id="heroIllusSlider">
+                    <img src="./hero_illustration_web.webp"
+                         alt="Ilustrasi Website 1" class="hero-illus-slide hero-illustration">
+                    <img src="./hero_illustration_web-2.webp"
+                         alt="Ilustrasi Website 2" class="hero-illus-slide hero-illustration">
+                    <img src="./hero_illustration_web-3.webp"
+                         alt="Ilustrasi Website 3" class="hero-illus-slide hero-illustration">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="keunggulan" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Kenapa Pilih Kami?</h2>
+            <div class="features-grid">
+                <!-- Card 1: miring kiri -->
+                <div class="feature-card card-reveal">
+                    <div class="feature-banner">RINGAN</div>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg>
+                    </div>
+                    <h3>Teknologi Cepat</h3>
+                    <p>Website tanpa database rumit. Sangat ringan, cepat diakses, dan tidak perlu pusing membayar sewa
+                        server mahal setiap bulannya.</p>
+                </div>
+                <!-- Card 2: miring kanan -->
+                <div class="feature-card card-reveal" data-delay="150">
+                    <div class="feature-banner">DARI HP</div>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                            <line x1="12" y1="18" x2="12.01" y2="18" />
+                        </svg>
+                    </div>
+                    <h3>Kelola dari HP</h3>
+                    <p>Ubah warna, tambah produk, edit harga &mdash; semua cukup dari HP Anda. Tidak perlu laptop, tidak perlu coding, tidak perlu pusing.</p>
+                </div>
+                <!-- Card 3: miring kiri -->
+                <div class="feature-card card-reveal" data-delay="300">
+                    <div class="feature-banner">SUPPORT</div>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                    </div>
+                    <h3>Support Penuh</h3>
+                    <p>Gaptek? Tidak masalah. Tim kami akan memandu Anda, memberikan e-book tutorial, hingga revisi
+                        tampilan sampai Anda puas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PORTOFOLIO ===== -->
+    <section id="portofolio" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Portofolio</h2>
+            <p class="porto-subtitle">Klik gambar untuk melihat website</p>
+        </div>
+
+        <div class="porto-clip-wrapper">
+        <div class="porto-stage" id="portoStage">
+            <div class="porto-track" id="portoTrack">
+
+                <!-- Card 1 -->
+                <a href="#" class="porto-card" target="_blank" aria-label="Warung Mbok Sari">
+                    <img src="https://placehold.co/300x430/0a1645/0ef7f7?text=IMG+PORTO+1" alt="Porto 1" loading="lazy">
+                    <div class="porto-overlay">
+                        <h4>Warung Mbok Sari</h4>
+                        <p>Toko makanan khas Jawa dengan menu harian yang bisa diupdate dari HP</p>
+                    </div>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="#" class="porto-card" target="_blank" aria-label="Toko Batik Nusantara">
+                    <img src="https://placehold.co/300x430/0a1645/0ef7f7?text=IMG+PORTO+2" alt="Porto 2" loading="lazy">
+                    <div class="porto-overlay">
+                        <h4>Batik Nusantara</h4>
+                        <p>Etalase digital produk batik premium, kelola koleksi langsung via Google Sheets</p>
+                    </div>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="#" class="porto-card" target="_blank" aria-label="Klinik Kecantikan Aura">
+                    <img src="https://placehold.co/300x430/0a1645/0ef7f7?text=IMG+PORTO+3" alt="Porto 3" loading="lazy">
+                    <div class="porto-overlay">
+                        <h4>Klinik Aura</h4>
+                        <p>Website klinik kecantikan dengan katalog treatment dan harga yang mudah diubah</p>
+                    </div>
+                </a>
+
+                <!-- Card 4 -->
+                <a href="#" class="porto-card" target="_blank" aria-label="Percetakan Cepat Print">
+                    <img src="https://placehold.co/300x430/0a1645/0ef7f7?text=IMG+PORTO+4" alt="Porto 4" loading="lazy">
+                    <div class="porto-overlay">
+                        <h4>Cepat Print</h4>
+                        <p>Jasa percetakan dengan daftar layanan dan harga yang bisa diperbarui kapan saja</p>
+                    </div>
+                </a>
+
+                <!-- Card 5 -->
+                <a href="#" class="porto-card" target="_blank" aria-label="Toko Herbal Sehat">
+                    <img src="https://placehold.co/300x430/0a1645/0ef7f7?text=IMG+PORTO+5" alt="Porto 5" loading="lazy">
+                    <div class="porto-overlay">
+                        <h4>Herbal Sehat</h4>
+                        <p>Toko produk herbal dan jamu tradisional dengan katalog lengkap yang mudah diupdate</p>
+                    </div>
+                </a>
+
+                <!-- Card 6 -->
+                <a href="#" class="porto-card" target="_blank" aria-label="Studio Foto Cahaya">
+                    <img src="https://placehold.co/300x430/0a1645/0ef7f7?text=IMG+PORTO+6" alt="Porto 6" loading="lazy">
+                    <div class="porto-overlay">
+                        <h4>Studio Cahaya</h4>
+                        <p>Jasa foto produk profesional, paket harga dan portofolio bisa dikelola dari HP</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+        </div><!-- /porto-clip-wrapper -->
+
+        <!-- Navigation -->
+        <div class="porto-nav">
+            <button class="porto-btn" id="portoPrev" aria-label="Sebelumnya">&#8592;</button>
+            <div class="porto-dots" id="portoDots">
+                <span class="porto-dot active" data-idx="0"></span>
+                <span class="porto-dot" data-idx="1"></span>
+                <span class="porto-dot" data-idx="2"></span>
+                <span class="porto-dot" data-idx="3"></span>
+                <span class="porto-dot" data-idx="4"></span>
+                <span class="porto-dot" data-idx="5"></span>
+            </div>
+            <button class="porto-btn" id="portoNext" aria-label="Berikutnya">&#8594;</button>
+        </div>
+    </section>
+
+    <section id="layanan" class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">Pilihan Layanan</h2>
+            <div class="pricing-grid">
+                <div class="neu-card price-card reveal">
+                    <div
+                        style="background:var(--color-red);color:white;display:inline-block;padding:4px 12px;font-weight:800;border-radius:999px;border:2px solid var(--color-default);margin-bottom:10px;width:max-content;">
+                        PROMO UMKM</div>
+                    <h3 class="price-title">Paket Express</h3>
+                    <p style="margin-bottom:20px;">Website etalase instan, kelola lewat Google Sheets.</p>
+                    <div style="text-decoration:line-through;font-weight:800;opacity:0.6;font-size:1.2rem;">Rp 700.000
+                    </div>
+                    <div class="price-amount">Rp 100k</div>
+                    <ul class="features-list">
+                        <li>Terima Beres (Langsung Online)</li>
+                        <li>Bebas Pilih 4 Tema Premium</li>
+                        <li>Kelola 100% dari HP (Google Sheets)</li>
+                        <li>Checkout Order langsung via WhatsApp</li>
+                        <li>Gratis Input 20 Produk Awal</li>
+                        <li><strong>Tanpa Biaya Server Bulanan</strong></li>
+                    </ul>
+                    <a href="./paket_express.html" class="neu-btn btn-bounce">👀 Lihat Selengkapnya</a>
+                </div>
+                <div class="neu-card price-card featured reveal" style="animation-delay: 0.2s;">
+                    <div
+                        style="background:var(--color-accent);color:var(--color-default);display:inline-block;padding:4px 12px;font-weight:800;border-radius:999px;border:2px solid var(--color-default);margin-bottom:10px;width:max-content;">
+                        RECOMMENDED</div>
+                    <h3 class="price-title">Paket Custom</h3>
+                    <p style="margin-bottom:20px;">Desain eksklusif &amp; penambahan fitur khusus untuk brand Anda.</p>
+                    <div style="text-decoration:line-through;font-weight:800;opacity:0.6;font-size:1.2rem;">Mulai Rp
+                        1.000.000</div>
+                    <div class="price-amount">Rp 300k+</div>
+                    <ul class="features-list">
+                        <li>Semua fitur di Paket Express</li>
+                        <li>Desain Layout Eksklusif (Bebas Request)</li>
+                        <li>Penambahan Halaman/Section Baru</li>
+                        <li>Struktur UX/UI Disesuaikan</li>
+                        <li>Prioritas Support &amp; Konsultasi</li>
+                    </ul>
+                    <a href="https://wa.me/6283834048345?text=Halo%20Taul%20StaticWeb,%20saya%20mau%20tanya%20tentang%20jasa%20pembuatan%20websitenya.%20Saya%20tertarik%20dengan%20Paket%20Custom"
+                        target="_blank" class="neu-btn neu-btn-secondary btn-bounce"
+                        style="border-color:var(--color-accent);box-shadow:4px 4px 0 var(--color-accent);">💬 Konsultasi
+                        Sekarang</a>
+                </div>
+            </div>
+            <div class="tutorial-banner">
+                <p>📖 Sudah jadi klien? Pelajari cara mengelola website Anda dari HP!</p>
+                <a href="./tutorial_klien.html" class="neu-btn" style="font-size:0.95rem;padding:12px 24px;">Buka
+                    Tutorial Klien</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="alur" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Alur Kerja Kami</h2>
+            <div class="workflow-grid">
+                <div class="step-card reveal">
+                    <div class="step-number">1</div>
+                    <h4>Konsultasi</h4>
+                    <p style="font-size:0.95rem;">Hubungi kami via WA, pilih paket, dan ceritakan kebutuhan bisnis Anda.
+                    </p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">2</div>
+                    <h4>Kirim Data</h4>
+                    <p style="font-size:0.95rem;">Kirimkan logo, warna brand, dan daftar harga/produk Anda ke tim kami.
+                    </p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">3</div>
+                    <h4>Proses Eksekusi</h4>
+                    <p style="font-size:0.95rem;">Duduk tenang. Kami merakit dan mendesain website Anda dalam waktu
+                        singkat.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">4</div>
+                    <h4>Online &amp; Edukasi</h4>
+                    <p style="font-size:0.95rem;">Web diserahkan. Kami berikan E-Book cara edit web sendiri dari HP
+                        Anda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONI ===== -->
+    <section id="testimoni">
+        <div class="container">
+            <h2 class="section-title">Apa Kata Mereka?</h2>
+        </div>
+
+        <div class="testi-stage" id="testiStage">
+
+            <!-- Card 1 -->
+            <div class="testi-card" data-tidx="0">
+                <span class="testi-cut-line"></span>
+                <img class="testi-photo" src="https://i.ibb.co.com/LDvtynMK/profile-pic-dummy.webp"
+                     onerror="this.src='https://i.ibb.co.com/LDvtynMK/profile-pic-dummy.webp'" alt="Siti Rahayu">
+                <p class="testi-quote">&ldquo;Sekarang saya bisa update menu harian cukup dari HP saja. Pelanggan makin percaya lihat tampilan web kami yang profesional!&rdquo;</p>
+                <p class="testi-attr">&mdash; Siti Rahayu, Pemilik Warung Mbok Sari</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="testi-card" data-tidx="1">
+                <span class="testi-cut-line"></span>
+                <img class="testi-photo" src="https://i.ibb.co.com/LDvtynMK/profile-pic-dummy.webp"
+                     onerror="this.src='https://i.ibb.co.com/LDvtynMK/profile-pic-dummy.webp'" alt="Budi Santoso">
+                <p class="testi-quote">&ldquo;Awalnya ragu karena gaptek, tapi ternyata gampang banget. Tim Taul sangat sabar membimbing sampai saya bisa kelola sendiri.&rdquo;</p>
+                <p class="testi-attr">&mdash; Budi Santoso, Pengusaha Batik Nusantara</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="testi-card" data-tidx="2">
+                <span class="testi-cut-line"></span>
+                <img class="testi-photo" src="https://i.ibb.co.com/LDvtynMK/profile-pic-dummy.webp"
+                     onerror="this.src='https://i.ibb.co.com/LDvtynMK/profile-pic-dummy.webp'" alt="Dewi Anggraini">
+                <p class="testi-quote">&ldquo;Website klinik kami sekarang tampak jauh lebih profesional. Banyak klien baru bilang mereka nemuin kami dari web. Worth it banget!&rdquo;</p>
+                <p class="testi-attr">&mdash; Dewi Anggraini, Pemilik Klinik Aura</p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="testi-card" data-tidx="3">
+                <span class="testi-cut-line"></span>
+                <img class="testi-photo" src="https://i.ibb.co.com/LDvtynMK/profile-pic-dummy.webp"
+                     onerror="this.src='https://i.ibb.co.com/LDvtynMK/profile-pic-dummy.webp'" alt="Hendra Wijaya">
+                <p class="testi-quote">&ldquo;Harganya sangat terjangkau tapi hasilnya premium. Tidak ada biaya server bulanan lagi &mdash; hemat banyak dibanding dulu!&rdquo;</p>
+                <p class="testi-attr">&mdash; Hendra Wijaya, Jasa Percetakan Cepat Print</p>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="testi-card" data-tidx="4">
+                <span class="testi-cut-line"></span>
+                <img class="testi-photo" src="https://i.ibb.co.com/LDvtynMK/profile-pic-dummy.webp"
+                     onerror="this.src='https://i.ibb.co.com/LDvtynMK/profile-pic-dummy.webp'" alt="Nurul Aini">
+                <p class="testi-quote">&ldquo;Prosesnya cepat, langsung jadi dan online. Produk herbal saya sekarang punya etalase digital yang rapi dan mudah dicari.&rdquo;</p>
+                <p class="testi-attr">&mdash; Nurul Aini, Pemilik Toko Herbal Sehat</p>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="testi-card" data-tidx="5">
+                <span class="testi-cut-line"></span>
+                <img class="testi-photo" src="https://i.ibb.co.com/LDvtynMK/profile-pic-dummy.webp"
+                     onerror="this.src='https://i.ibb.co.com/LDvtynMK/profile-pic-dummy.webp'" alt="Rizky Firmansyah">
+                <p class="testi-quote">&ldquo;Portfolio saya bisa dilihat online kapan saja. Sudah dapat 3 klien baru dalam seminggu pertama website aktif. Rekomen banget!&rdquo;</p>
+                <p class="testi-attr">&mdash; Rizky Firmansyah, Fotografer Studio Cahaya</p>
+            </div>
+
+        </div>
+
+        <div class="testi-nav">
+            <button class="testi-btn" id="testiBtnPrev">&#8592;</button>
+            <button class="testi-btn" id="testiBtnNext">&#8594;</button>
+        </div>
+    </section>
+
+    <section id="faq" style="background:var(--color-light-surface);">
+        <div class="container faq-container">
+            <h2 class="section-title">Pertanyaan Umum</h2>
+            <details class="faq-item">
+                <summary class="faq-summary">Apakah ada biaya bulanan atau sewa hosting?</summary>
+                <div class="faq-content">Untuk Paket Express, <strong>tidak ada biaya bulanan sama sekali</strong> untuk
+                    server/hosting. Kami menggunakan teknologi static modern dan GitHub Pages sehingga web Anda online
+                    gratis selamanya.</div>
+            </details>
+            <details class="faq-item">
+                <summary class="faq-summary">Bagaimana jika saya tidak mengerti coding?</summary>
+                <div class="faq-content">Website ini memang dirancang khusus untuk orang awam. Anda tidak perlu
+                    menyentuh kode sama sekali. Untuk mengubah harga produk, menambah stok, atau mengubah teks, Anda
+                    cukup mengetiknya di Google Sheets dari HP Anda.</div>
+            </details>
+            <details class="faq-item">
+                <summary class="faq-summary">Berapa lama proses pembuatan website?</summary>
+                <div class="faq-content">Untuk Paket Express, website bisa langsung jadi dan online dalam waktu
+                    <strong>1x24 jam</strong> setelah Anda mengirimkan data lengkap. Untuk Paket Custom, proses memakan
+                    waktu 3-5 hari kerja.</div>
+            </details>
+            <details class="faq-item">
+                <summary class="faq-summary">Apakah saya bisa menggunakan domain sendiri (.com / .id)?</summary>
+                <div class="faq-content">Sangat bisa! Namun, harga paket belum termasuk biaya pembelian domain. Kami
+                    bisa membantu Anda menyambungkan website ini ke domain .com atau .id milik Anda sendiri.</div>
+            </details>
+            <details class="faq-item">
+                <summary class="faq-summary">Bagaimana cara mengelola datanya dari HP?</summary>
+                <div class="faq-content">Kami menyediakan <strong>Panel Admin khusus</strong> yang sangat ringan dan
+                    mudah digunakan dari HP. Anda cukup login dengan link kunci Anda, lalu Anda bisa mengedit nama
+                    produk, harga, stok, hingga banner promo secara instan tanpa perlu menyentuh kode sama sekali.</div>
+            </details>
+        </div>
+    </section>
+
+    <footer id="kontak">
+        <!-- Top footer: 3 kolom -->
+        <div class="footer-top">
+            <div class="container footer-grid">
+
+                <!-- Kolom 1: Brand -->
+                <div class="footer-col">
+                    <div class="footer-brand">Taul StaticWeb</div>
+                    <p class="footer-tagline">Jasa website static profesional untuk UMKM Indonesia. Tampil online, kelola dari HP, tanpa biaya server bulanan.</p>
+                    <div class="footer-badge">UMKM FRIENDLY</div>
+                </div>
+
+                <!-- Kolom 2: Kontak -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Kontak</h4>
+                    <ul class="footer-contact-list">
+                        <li>
+                            <span class="footer-icon">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 7.8 19.79 19.79 0 0 1 .18 3.18 2 2 0 0 1 2.18 1h3a2 2 0 0 1 2 1.72c.127.96.362 1.9.7 2.81a2 2 0 0 1-.45 2.11L6.91 8.09a16 16 0 0 0 6 6l.56-.56a2 2 0 0 1 2.11-.45c.91.338 1.85.573 2.81.7A2 2 0 0 1 20 16z"/></svg>
+                            </span>
+                            <a href="https://wa.me/6283834048345" target="_blank">+62 838-3404-8345</a>
+                        </li>
+                        <li>
+                            <span class="footer-icon">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </span>
+                            <span>Wonosobo, Jawa Tengah</span>
+                        </li>
+                        <li>
+                            <span class="footer-icon">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            </span>
+                            <span>Senin &ndash; Sabtu, 08.00&ndash;21.00</span>
+                        </li>
+                    </ul>
+                    <!-- Sosial Media -->
+                    <div class="footer-socials">
+                        <a href="https://wa.me/6283834048345?text=Halo%20Taul%20StaticWeb" target="_blank" class="footer-social-btn" aria-label="WhatsApp">
+                            <img src="https://cdn.simpleicons.org/whatsapp/0a1645" alt="WA">
+                        </a>
+                        <a href="https://www.instagram.com/taulmiftah28" target="_blank" class="footer-social-btn" aria-label="Instagram">
+                            <img src="https://cdn.simpleicons.org/instagram/0a1645" alt="IG">
+                        </a>
+                        <a href="https://vm.tiktok.com/ZS9FNDaNtnxXR-PeWk0/" target="_blank" class="footer-social-btn" aria-label="TikTok">
+                            <img src="https://cdn.simpleicons.org/tiktok/0a1645" alt="TikTok">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bottom bar: copyright -->
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <span>&copy; 2026 <strong>Taul StaticWeb</strong>. All rights reserved.</span>
+                <span class="footer-made">Made with &#10084; for UMKM Indonesia</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/6283834048345?text=Halo%20Taul%20StaticWeb,%20saya%20mau%20tanya%20tentang%20jasa%20pembuatan%20websitenya"
+        class="whatsapp-float" target="_blank" aria-label="Chat WhatsApp">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="white">
+            <path
+                d="M16 2C8.268 2 2 8.268 2 16c0 2.469.648 4.786 1.781 6.8L2 30l7.38-1.742A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.44 11.44 0 0 1-5.824-1.586l-.416-.248-4.32 1.02 1.062-4.202-.272-.43A11.46 11.46 0 0 1 4.5 16C4.5 9.649 9.649 4.5 16 4.5S27.5 9.649 27.5 16 22.351 27.5 16 27.5zm6.29-8.618c-.344-.172-2.036-1.004-2.352-1.118-.316-.116-.546-.172-.776.172-.23.344-.888 1.118-1.09 1.348-.2.23-.402.258-.746.086-.344-.172-1.452-.536-2.766-1.706-1.022-.912-1.712-2.038-1.912-2.382-.2-.344-.022-.53.15-.7.154-.154.344-.402.516-.602.17-.2.228-.344.344-.574.114-.23.058-.43-.028-.602-.086-.172-.776-1.87-1.062-2.56-.28-.672-.564-.58-.776-.59-.2-.01-.43-.012-.66-.012-.23 0-.602.086-.918.43-.316.344-1.204 1.176-1.204 2.868 0 1.692 1.232 3.326 1.404 3.556.172.23 2.426 3.704 5.876 5.192.82.354 1.46.566 1.96.724.822.262 1.572.226 2.164.138.66-.098 2.036-.832 2.322-1.636.286-.804.286-1.492.2-1.636-.086-.144-.316-.23-.66-.402z" />
+        </svg>
+    </a>
+
+    <!-- Scroll to Top Button -->
+    <a href="#" class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to Top">
+        <svg viewBox="0 0 24 24">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </a>
+
+    <script>
+        // ===== LINK GOOGLE APPS SCRIPT (GAS) - GANTI LINK DI BAWAH INI =====
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbwN-eMLXHlUyqYjWyuR_b2OLrCw3qNTc6yz05DXzdoBtNYZQ0rfQoota9hZqNMnpFyW/exec"; 
+
+        let heroSliderInterval;
+        let portfolioAutoTimer;
+        let testiAutoTimer;
+
+        // ===== HERO ILLUSTRATION SLIDER =====
+        function initHeroSlider() {
+            const sliderEl = document.getElementById('heroIllusSlider');
+            if (!sliderEl) return;
+            const slides = Array.from(sliderEl.querySelectorAll('.hero-illus-slide'));
+            if (!slides.length) return;
+
+            if (heroSliderInterval) clearInterval(heroSliderInterval);
+
+            // Reset classes
+            slides.forEach(s => s.classList.remove('is-active', 'is-exiting'));
+            
+            let cur = 0;
+            slides[cur].classList.add('is-active');
+
+            if (slides.length < 2) return; // 1 gambar = tidak perlu rotate
+
+            function advance() {
+                const prev = cur;
+                cur = (cur + 1) % slides.length;
+                slides[cur].classList.add('is-active');
+                slides[prev].classList.remove('is-active');
+                slides[prev].classList.add('is-exiting');
+                setTimeout(() => slides[prev].classList.remove('is-exiting'), 800);
+            }
+
+            heroSliderInterval = setInterval(advance, 4000);
+
+            sliderEl.onmouseenter = () => clearInterval(heroSliderInterval);
+            sliderEl.onmouseleave = () => { 
+                clearInterval(heroSliderInterval); 
+                heroSliderInterval = setInterval(advance, 4000); 
+            };
+        }
+
+        // ===== PORTFOLIO CAROUSEL 3D COVERFLOW =====
+        function initPortfolioCarousel() {
+            const stage   = document.getElementById('portoStage');
+            const track   = document.getElementById('portoTrack');
+            const cards   = Array.from(document.querySelectorAll('.porto-card'));
+            const dots    = Array.from(document.querySelectorAll('.porto-dot'));
+            const btnPrev = document.getElementById('portoPrev');
+            const btnNext = document.getElementById('portoNext');
+            if (!track || !cards.length) return;
+
+            if (portfolioAutoTimer) clearInterval(portfolioAutoTimer);
+
+            const total = cards.length;
+            let current = 0;
+
+            // Config tetap
+            const cfgFull = [
+                { tz:   0, ry:  0,  scale: 1.0,  opacity: 1.0,  blur: 0,   z: 20, pe: 'auto' }, // aktif
+                { tz: -50, ry: 12,  scale: 0.82, opacity: 0.68, blur: 2.5, z:  8, pe: 'auto' }, // ±1
+                { tz: -50, ry: 12,  scale: 0.82, opacity: 0,    blur: 0,   z:  2, pe: 'none' }, // ±2+ tersembunyi
+            ];
+
+            // Jarak relatif terpendek
+            function relPos(i) {
+                let d = ((i - current) % total + total) % total;
+                if (d > total / 2) d -= total;
+                return d;
+            }
+
+            function applyAll() {
+                const stageH = stage.offsetHeight;
+                const cardH  = Math.max(Math.round(stageH * 0.88), 340); 
+                const cardW  = Math.max(Math.round(cardH * 0.64), 220);  
+
+                cards.forEach(c => {
+                    c.style.width  = cardW + 'px';
+                    c.style.height = cardH + 'px';
+                    const h4 = c.querySelector('.porto-overlay h4');
+                    const p  = c.querySelector('.porto-overlay p');
+                    if (h4) h4.style.fontSize = Math.max(Math.round(cardW * 0.063), 10) + 'px';
+                    if (p)  p.style.fontSize  = Math.max(Math.round(cardW * 0.048), 8)  + 'px';
+                    const ov = c.querySelector('.porto-overlay');
+                    if (ov) ov.style.padding =
+                        `${Math.round(cardH * 0.14)}px ${Math.round(cardW * 0.08)}px ` +
+                        `${Math.round(cardH * 0.04)}px`;
+                });
+
+                const tx1 = cardW * 0.50;
+                const txMap = [0, tx1, tx1];
+
+                cards.forEach((card, i) => {
+                    const pos    = relPos(i);
+                    const absPos = Math.abs(pos);
+                    const sign   = pos > 0 ? 1 : pos < 0 ? -1 : 0;
+                    const idx    = Math.min(absPos, 2);
+                    const c      = cfgFull[idx];
+                    const tx     = txMap[idx] * sign;
+                    const ry     = c.ry * sign;
+
+                    card.style.transform =
+                        `translate(calc(-50% + ${tx}px), -50%) ` +
+                        `translateZ(${c.tz}px) ` +
+                        `rotateY(${ry}deg) ` +
+                        `scale(${c.scale})`;
+                    card.style.opacity      = c.opacity;
+                    card.style.filter       = c.blur ? `blur(${c.blur}px)` : 'none';
+                    card.style.zIndex       = c.z;
+                    card.style.pointerEvents = c.pe;
+                    card.classList.toggle('is-active', pos === 0);
+                });
+                dots.forEach((d, i) => d.classList.toggle('active', i === current));
+            }
+
+            function goTo(idx) {
+                current = ((idx % total) + total) % total;
+                applyAll();
+            }
+
+            function startAuto() {
+                clearInterval(portfolioAutoTimer);
+                portfolioAutoTimer = setInterval(() => goTo(current + 1), 4000);
+            }
+
+            goTo(0);
+            startAuto();
+
+            btnPrev.onclick = () => { goTo(current - 1); startAuto(); };
+            btnNext.onclick = () => { goTo(current + 1); startAuto(); };
+
+            dots.forEach(dot => {
+                dot.onclick = () => { goTo(+dot.dataset.idx); startAuto(); };
+            });
+
+            stage.onmouseenter = () => clearInterval(portfolioAutoTimer);
+            stage.onmouseleave = startAuto;
+            window.addEventListener('resize', applyAll);
+
+            cards.forEach((card, i) => {
+                card.onclick = (e) => {
+                    if (!card.classList.contains('is-active')) {
+                        e.preventDefault();
+                        goTo(i);
+                        startAuto();
+                    }
+                };
+            });
+        }
+
+        // ===== TESTIMONIAL STAGGER CAROUSEL =====
+        function initTestimonialCarousel() {
+            const stage   = document.getElementById('testiStage');
+            const btnPrev = document.getElementById('testiBtnPrev');
+            const btnNext = document.getElementById('testiBtnNext');
+            if (!stage) return;
+
+            const cards = Array.from(stage.querySelectorAll('.testi-card'));
+            const total = cards.length;
+            if (!total) return;
+
+            if (testiAutoTimer) clearInterval(testiAutoTimer);
+
+            let current   = 0;
+
+            function relPos(i) {
+                let d = ((i - current) % total + total) % total;
+                if (d > total / 2) d -= total;
+                return d;
+            }
+
+            function applyAll() {
+                const stageH   = stage.offsetHeight;
+                const stageW   = stage.offsetWidth;
+                const byHeight = Math.round(stageH * 0.70);
+                const byWidth  = Math.round(stageW * 0.62);
+                const cardSize = Math.max(Math.min(byHeight, byWidth, 380), 180);
+                const cut      = Math.round(cardSize * 0.11);  
+                const diagLen  = Math.round(Math.sqrt(2) * cut);
+                const spacing  = Math.round(cardSize / 1.5);   
+
+                cards.forEach((card, i) => {
+                    const pos    = relPos(i);
+                    const absPos = Math.abs(pos);
+                    const isCenter = pos === 0;
+
+                    card.style.width  = cardSize + 'px';
+                    card.style.height = cardSize + 'px';
+                    card.style.clipPath =
+                        `polygon(${cut}px 0%, calc(100% - ${cut}px) 0%, 100% ${cut}px, 100% 100%, 0 100%, 0 0)`;
+
+                    const line = card.querySelector('.testi-cut-line');
+                    if (line) {
+                        line.style.top   = cut + 'px';
+                        line.style.width = diagLen + 'px';
+                    }
+
+                    const qEl = card.querySelector('.testi-quote');
+                    const aEl = card.querySelector('.testi-attr');
+                    const pEl = card.querySelector('.testi-photo');
+                    if (qEl) qEl.style.fontSize = Math.max(Math.round(cardSize * 0.052), 10) + 'px';
+                    if (aEl) aEl.style.fontSize = Math.max(Math.round(cardSize * 0.040), 8)  + 'px';
+                    if (pEl) {
+                        const ph = Math.round(cardSize * 0.15);
+                        pEl.style.width  = Math.round(ph * 0.85) + 'px';
+                        pEl.style.height = ph + 'px';
+                    }
+
+                    const pad = Math.round(cardSize * 0.07);
+                    card.style.padding = pad + 'px';
+                    if (aEl) {
+                        aEl.style.bottom = pad + 'px';
+                        aEl.style.left   = pad + 'px';
+                        aEl.style.right  = pad + 'px';
+                    }
+
+                    const tx  = spacing * pos;
+                    const ty  = isCenter ? -Math.round(cardSize * 0.17) : (pos % 2 ? 15 : -15);
+                    const rot = isCenter ? 0 : (pos % 2 ? 2.5 : -2.5);
+
+                    const opacity = absPos >= 3 ? 0 : absPos === 2 ? 0.45 : 1;
+                    const z       = isCenter ? 20 : absPos === 1 ? 10 : absPos === 2 ? 5 : 1;
+
+                    card.style.transform    = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) rotate(${rot}deg)`;
+                    card.style.opacity      = opacity;
+                    card.style.zIndex       = z;
+                    card.style.pointerEvents = absPos > 2 ? 'none' : 'auto';
+                    card.classList.toggle('is-center', isCenter);
+                });
+            }
+
+            function goTo(idx) {
+                current = ((idx % total) + total) % total;
+                applyAll();
+            }
+
+            function startAuto() {
+                clearInterval(testiAutoTimer);
+                testiAutoTimer = setInterval(() => goTo(current + 1), 4000);
+            }
+
+            goTo(0);
+            startAuto();
+
+            btnPrev.onclick = () => { goTo(current - 1); startAuto(); };
+            btnNext.onclick = () => { goTo(current + 1); startAuto(); };
+
+            stage.onmouseenter = () => clearInterval(testiAutoTimer);
+            stage.onmouseleave = startAuto;
+            window.addEventListener('resize', applyAll);
+
+            cards.forEach((card, i) => {
+                card.onclick = () => {
+                    const pos = relPos(i);
+                    if (pos !== 0) { goTo(current + pos); startAuto(); }
+                };
+            });
+        }
+
+        // ===== FAQ SMOOTH ACCORDION =====
+        function initFaqAccordion() {
+            document.querySelectorAll('.faq-item').forEach(details => {
+                const summary = details.querySelector('.faq-summary');
+                const content = details.querySelector('.faq-content');
+                if (!summary || !content) return;
+
+                if (summary.dataset.initialized) return;
+                summary.dataset.initialized = 'true';
+
+                summary.addEventListener('click', e => {
+                    e.preventDefault();
+                    const isOpen = details.classList.contains('faq-open');
+                    if (isOpen) {
+                        details.classList.remove('faq-open');
+                        content.classList.remove('faq-open');
+                        setTimeout(() => details.removeAttribute('open'), 420);
+                    } else {
+                        details.setAttribute('open', '');
+                        details.classList.add('faq-open');
+                        content.classList.add('faq-open');
+                    }
+                });
+            });
+        }
+
+        // ===== SCROLL REVEALS & NAVBAR EVENTS (GLOBAL) =====
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const el = entry.target;
+                if (entry.isIntersecting) {
+                    el.classList.add('active');
+                } else {
+                    if (entry.boundingClientRect.top < 0) {
+                        el.classList.remove('active');
+                    }
+                }
+            });
+        }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+        revealElements.forEach(el => revealObs.observe(el));
+
+        // ===== CARD REVEAL (sekali saja, stagger delay) =====
+        const cardRevealEls = document.querySelectorAll('.card-reveal');
+        const cardRevealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = parseInt(entry.target.dataset.delay || 0);
+                    setTimeout(() => entry.target.classList.add('active'), delay);
+                    cardRevealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        cardRevealEls.forEach(el => cardRevealObserver.observe(el));
+
+        // ===== FOOTER COLUMNS REVEAL =====
+        const footerCols = document.querySelectorAll('.footer-col');
+        const footerObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('vis'); }
+                else if (entry.boundingClientRect.top > 0) { entry.target.classList.remove('vis'); }
+            });
+        }, { threshold: 0.15 });
+        footerCols.forEach(el => footerObs.observe(el));
+
+        // ===== NAVBAR SCROLL SHRINK & SCROLL TO TOP =====
+        const mainNav = document.getElementById('main-nav');
+        const scrollTopBtn = document.getElementById('scroll-to-top');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            mainNav.classList.toggle('scrolled', scrollY > 60);
+            if (scrollTopBtn) {
+                scrollTopBtn.classList.toggle('show', scrollY > 300);
+            }
+        }, { passive: true });
+
+        if (scrollTopBtn) {
+            scrollTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // ===== SECTION TITLES: reveal dari bawah =====
+        const sectionTitles = document.querySelectorAll('.section-title');
+        sectionTitles.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        });
+        const titleObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const el = entry.target;
+                if (entry.isIntersecting) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                } else if (entry.boundingClientRect.top > 0) {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                }
+            });
+        }, { threshold: 0.3 });
+        sectionTitles.forEach(el => titleObs.observe(el));
+
+        // Hamburger menu toggle
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerBtn.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
+        document.querySelectorAll('.menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburgerBtn.classList.remove('open');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // Set kecepatan putar video hero menjadi 80%
+        document.querySelectorAll('.hero-video').forEach(vid => {
+            vid.playbackRate = 0.8;
+            vid.addEventListener('loadeddata', () => { vid.playbackRate = 0.8; });
+        });
+
+        // ===== DYNAMIC HYDRATION VIA GAS =====
+        function hydrateWebsite(data) {
+            if (!data) return;
+
+            // Helper format no telepon
+            function formatPhone(num) {
+                if (!num) return '';
+                let str = num.toString().trim().replace(/[^0-9]/g, '');
+                if (str.startsWith('62')) {
+                    let part1 = str.substring(2, 5);
+                    let part2 = str.substring(5, 9);
+                    let part3 = str.substring(9);
+                    return `+62 ${part1}-${part2}-${part3}`;
+                }
+                if (str.startsWith('0')) {
+                    let part1 = str.substring(1, 4);
+                    let part2 = str.substring(4, 8);
+                    let part3 = str.substring(8);
+                    return `0${part1}-${part2}-${part3}`;
+                }
+                return '+' + str;
+            }
+
+            const umum = data.Umum || {};
+            const waNumber = umum['WA Number'] || '6283834048345';
+            const waGreeting = umum['WA Greeting'] || '';
+
+            const buildWaLink = (customText) => {
+                const text = customText || waGreeting;
+                return `https://wa.me/${waNumber}${text ? '?text=' + encodeURIComponent(text) : ''}`;
+            };
+
+            // Update Meta SEO
+            if (umum['Seo Title']) document.title = umum['Seo Title'];
+            
+            let metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc && umum['Seo Description']) metaDesc.content = umum['Seo Description'];
+
+            let metaKey = document.querySelector('meta[name="keywords"]');
+            if (metaKey && umum['Seo Keywords']) metaKey.content = umum['Seo Keywords'];
+
+            let favicon = document.querySelector('link[rel="icon"]') || document.querySelector('link[rel="shortcut icon"]');
+            if (favicon && umum['Favicon Url']) favicon.href = umum['Favicon Url'];
+
+            let ogImg = document.querySelector('meta[property="og:image"]');
+            if (ogImg && umum['Link og image']) ogImg.content = umum['Link og image'];
+
+            let ogTitle = document.querySelector('meta[property="og:title"]');
+            if (ogTitle && umum['Seo Title']) ogTitle.content = umum['Seo Title'];
+
+            // Brand & Logo
+            const brandName = umum['Nama Brand'] || 'Taul StaticWeb';
+            const logoEl = document.querySelector('.logo');
+            if (logoEl) {
+                if (umum['Link Logo']) {
+                    logoEl.innerHTML = `<img src="${umum['Link Logo']}" alt="${brandName}" style="max-height: 40px; vertical-align: middle; margin-right: 8px;"> ${brandName}`;
+                } else {
+                    logoEl.textContent = brandName;
+                    logoEl.style.display = 'inline-flex';
+                    logoEl.style.alignItems = 'center';
+                }
+            }
+            const footerBrand = document.querySelector('.footer-brand');
+            if (footerBrand) footerBrand.textContent = brandName;
+            const copyrightStrong = document.querySelector('.footer-bottom-inner strong');
+            if (copyrightStrong) copyrightStrong.textContent = brandName;
+
+            // Hero Section
+            const heroBadge = document.querySelector('.hero-badge');
+            if (heroBadge) {
+                if (umum['Hero Badge']) {
+                    heroBadge.textContent = umum['Hero Badge'];
+                    heroBadge.style.display = 'inline-flex';
+                } else {
+                    heroBadge.style.display = 'none';
+                }
+            }
+            const heroTitle = document.querySelector('.hero-copy h1');
+            if (heroTitle && umum['Hero Title']) heroTitle.innerHTML = umum['Hero Title'];
+            const heroSubtitle = document.querySelector('.hero-copy > p');
+            if (heroSubtitle && umum['Hero Subtitle']) heroSubtitle.textContent = umum['Hero Subtitle'];
+
+            const heroBtn1 = document.querySelector('.hero-btns .btn-primary');
+            if (heroBtn1) {
+                if (umum['Hero Button 1 Text']) {
+                    heroBtn1.textContent = umum['Hero Button 1 Text'];
+                    let link = umum['Hero Button 1 Link'] || '#';
+                    heroBtn1.href = link.toLowerCase().startsWith('wa:') ? buildWaLink() : link;
+                    heroBtn1.style.display = 'inline-block';
+                } else {
+                    heroBtn1.style.display = 'none';
+                }
+            }
+            const heroBtn2 = document.querySelector('.hero-btns .btn-outline');
+            if (heroBtn2) {
+                if (umum['Hero Button 2 Text']) {
+                    heroBtn2.textContent = umum['Hero Button 2 Text'];
+                    let link = umum['Hero Button 2 Link'] || '#';
+                    heroBtn2.href = link.toLowerCase().startsWith('wa:') ? buildWaLink() : link;
+                    heroBtn2.style.display = 'inline-block';
+                } else {
+                    heroBtn2.style.display = 'none';
+                }
+            }
+
+            // Hero Images
+            const heroSlider = document.getElementById('heroIllusSlider');
+            if (heroSlider) {
+                const slides = [];
+                if (umum['Hero Image 1']) slides.push(umum['Hero Image 1']);
+                if (umum['Hero Image 2']) slides.push(umum['Hero Image 2']);
+                if (umum['Hero Image 3']) slides.push(umum['Hero Image 3']);
+                if (slides.length > 0) {
+                    heroSlider.innerHTML = slides.map((src, idx) => `
+                        <img src="${src}" alt="Ilustrasi Website ${idx + 1}" class="hero-illus-slide hero-illustration">
+                    `).join('');
+                    initHeroSlider();
+                }
+            }
+
+            // Section Titles
+            const secTitles = {
+                'keunggulan': umum['Judul Section Keunggulan'],
+                'portofolio': umum['Judul Section Portofolio'],
+                'layanan': umum['Judul Section Layanan'],
+                'alur': umum['Judul Section Alur Kerja'],
+                'testimoni': umum['Judul Section Testimoni'],
+                'faq': umum['Judul Section FAQ']
+            };
+            Object.keys(secTitles).forEach(id => {
+                const titleText = secTitles[id];
+                const sec = document.getElementById(id);
+                if (sec) {
+                    const titleEl = sec.querySelector('.section-title');
+                    if (titleEl && titleText) {
+                        titleEl.textContent = titleText;
+                    }
+                }
+            });
+
+            const subPorto = document.querySelector('.porto-subtitle');
+            if (subPorto && umum['Subjudul Section Portofolio']) {
+                subPorto.textContent = umum['Subjudul Section Portofolio'];
+            }
+
+            // Footer Tagline & Badge
+            const footerTagline = document.querySelector('.footer-tagline');
+            if (footerTagline && umum['Footer Tagline']) footerTagline.textContent = umum['Footer Tagline'];
+            const footerBadge = document.querySelector('.footer-badge');
+            if (footerBadge) {
+                if (umum['Footer Badge']) {
+                    footerBadge.textContent = umum['Footer Badge'];
+                    footerBadge.style.display = 'inline-block';
+                } else {
+                    footerBadge.style.display = 'none';
+                }
+            }
+
+            // Footer Address & Hours
+            const contactItems = document.querySelectorAll('.footer-contact-list li');
+            if (contactItems.length >= 3) {
+                const phoneA = contactItems[0].querySelector('a');
+                if (phoneA) {
+                    phoneA.href = `https://wa.me/${waNumber}`;
+                    phoneA.textContent = formatPhone(waNumber);
+                }
+                const addressSpan = contactItems[1].querySelector('span:last-child');
+                if (addressSpan) addressSpan.innerHTML = umum['Kontak Alamat'] || 'Wonosobo, Jawa Tengah';
+                const hoursSpan = contactItems[2].querySelector('span:last-child');
+                if (hoursSpan) hoursSpan.innerHTML = umum['Kontak Jam Kerja'] || 'Senin &ndash; Sabtu, 08.00&ndash;21.00';
+            }
+
+            // Floating WA
+            const floatWA = document.querySelector('.whatsapp-float');
+            if (floatWA) {
+                floatWA.href = buildWaLink();
+            }
+
+            // Social Media Icons
+            const footerSocials = document.querySelector('.footer-socials');
+            if (footerSocials) {
+                let html = '';
+                if (waNumber) {
+                    html += `
+                      <a href="${buildWaLink()}" target="_blank" class="footer-social-btn" aria-label="WhatsApp">
+                          <img src="https://cdn.simpleicons.org/whatsapp/0a1645" alt="WA">
+                      </a>
+                    `;
+                }
+                if (umum['Instagram']) {
+                    html += `
+                      <a href="${umum['Instagram']}" target="_blank" class="footer-social-btn" aria-label="Instagram">
+                          <img src="https://cdn.simpleicons.org/instagram/0a1645" alt="IG">
+                      </a>
+                    `;
+                }
+                if (umum['TikTok']) {
+                    html += `
+                      <a href="${umum['TikTok']}" target="_blank" class="footer-social-btn" aria-label="TikTok">
+                          <img src="https://cdn.simpleicons.org/tiktok/0a1645" alt="TikTok">
+                      </a>
+                    `;
+                }
+                if (umum['Facebook']) {
+                    html += `
+                      <a href="${umum['Facebook']}" target="_blank" class="footer-social-btn" aria-label="Facebook">
+                          <img src="https://cdn.simpleicons.org/facebook/0a1645" alt="FB">
+                      </a>
+                    `;
+                }
+                footerSocials.innerHTML = html;
+            }
+
+            // Popup Promo Overlay
+            if (umum['Popup Image']) {
+                const oldPopup = document.querySelector('.promo-popup-overlay');
+                if (oldPopup) oldPopup.remove();
+
+                const popupOverlay = document.createElement('div');
+                popupOverlay.className = 'promo-popup-overlay';
+                
+                let imgHtml = `<img class="promo-popup-img" src="${umum['Popup Image']}" alt="Promo">`;
+                if (umum['Popup Link']) {
+                    imgHtml = `<a href="${umum['Popup Link']}" target="_blank">${imgHtml}</a>`;
+                }
+                
+                popupOverlay.innerHTML = `
+                    <div class="promo-popup-content">
+                        <button class="promo-popup-close" aria-label="Tutup">&times;</button>
+                        ${imgHtml}
+                    </div>
+                `;
+                document.body.appendChild(popupOverlay);
+                
+                setTimeout(() => popupOverlay.classList.add('show'), 1500);
+                
+                const closeBtn = popupOverlay.querySelector('.promo-popup-close');
+                closeBtn.addEventListener('click', () => {
+                    popupOverlay.classList.remove('show');
+                    setTimeout(() => popupOverlay.remove(), 400);
+                });
+                popupOverlay.addEventListener('click', (e) => {
+                    if (e.target === popupOverlay) {
+                        popupOverlay.classList.remove('show');
+                        setTimeout(() => popupOverlay.remove(), 400);
+                    }
+                });
+            }
+
+            // Tab Keunggulan
+            const featuresGrid = document.querySelector('.features-grid');
+            const secKeunggulan = document.getElementById('keunggulan');
+            if (featuresGrid && secKeunggulan) {
+                if (data.Keunggulan && data.Keunggulan.length > 0) {
+                    featuresGrid.innerHTML = data.Keunggulan.map((item, idx) => {
+                        const delay = idx * 150;
+                        return `
+                            <div class="feature-card card-reveal" data-delay="${delay}">
+                                ${item['Banner Tag'] ? `<div class="feature-banner">${item['Banner Tag'].toUpperCase()}</div>` : ''}
+                                <div class="feature-icon">
+                                    <i data-lucide="${item['Nama Ikon Lucide'] || 'zap'}"></i>
+                                </div>
+                                <h3>${item['Judul'] || ''}</h3>
+                                <p>${item['Deskripsi'] || ''}</p>
+                            </div>
+                        `;
+                    }).join('');
+                    secKeunggulan.style.display = '';
+                } else {
+                    secKeunggulan.style.display = 'none';
+                }
+            }
+
+            // Tab Portofolio
+            const secPorto = document.getElementById('portofolio');
+            const portoTrack = document.getElementById('portoTrack');
+            const portoDots = document.getElementById('portoDots');
+            if (secPorto && portoTrack) {
+                if (data.Portofolio && data.Portofolio.length > 0) {
+                    portoTrack.innerHTML = data.Portofolio.map(item => `
+                        <a href="${item['Link Project'] || '#'}" class="porto-card" target="_blank" aria-label="${item['Nama Project']}">
+                            <img src="${item['Link Gambar'] || 'https://placehold.co/300x430/0a1645/0ef7f7?text=Portofolio'}" alt="${item['Nama Project']}" loading="lazy">
+                            <div class="porto-overlay">
+                                <h4>${item['Nama Project'] || ''}</h4>
+                                <p>${item['Deskripsi Singkat'] || ''}</p>
+                            </div>
+                        </a>
+                    `).join('');
+
+                    if (portoDots) {
+                        portoDots.innerHTML = data.Portofolio.map((_, idx) => `
+                            <span class="porto-dot ${idx === 0 ? 'active' : ''}" data-idx="${idx}"></span>
+                        `).join('');
+                    }
+                    secPorto.style.display = '';
+                    initPortfolioCarousel();
+                } else {
+                    secPorto.style.display = 'none';
+                }
+            }
+
+            // Tab Layanan
+            const secLayanan = document.getElementById('layanan');
+            const pricingGrid = document.querySelector('.pricing-grid');
+            if (secLayanan && pricingGrid) {
+                if (data.Layanan && data.Layanan.length > 0) {
+                    pricingGrid.innerHTML = data.Layanan.map((item, idx) => {
+                        const delay = idx * 150;
+                        const isFeatured = item['Badge Promo'] && item['Badge Promo'].toLowerCase().includes('recommend') ? 'featured' : '';
+                        const featuresHtml = (item['Daftar Fitur (pisahkan dengan baris baru)'] || item['Daftar Fitur'] || '').split('\n').filter(f => f.trim() !== '').map(f => {
+                            return `<li>${f.trim()}</li>`;
+                        }).join('');
+                        
+                        let btnLink = item['Link Tombol'] || '#';
+                        if (btnLink.toLowerCase().startsWith('wa:')) {
+                            btnLink = buildWaLink();
+                        }
+
+                        return `
+                            <div class="neu-card price-card ${isFeatured} reveal" style="transition-delay: ${delay}ms;">
+                                ${item['Badge Promo'] ? `
+                                    <div style="background:var(${isFeatured ? '--color-accent' : '--color-red'});color:${isFeatured ? 'var(--color-default)' : 'white'};display:inline-block;padding:4px 12px;font-weight:800;border-radius:999px;border:2px solid var(--color-default);margin-bottom:10px;width:max-content;">
+                                        ${item['Badge Promo']}
+                                    </div>
+                                ` : ''}
+                                <h3 class="price-title">${item['Nama Paket'] || ''}</h3>
+                                <p style="margin-bottom:20px;">${item['Deskripsi'] || ''}</p>
+                                ${item['Harga Coret'] ? `<div style="text-decoration:line-through;font-weight:800;opacity:0.6;font-size:1.2rem;">${item['Harga Coret']}</div>` : ''}
+                                <div class="price-amount">${item['Harga Promo'] || ''}</div>
+                                <ul class="features-list">
+                                    ${featuresHtml}
+                                </ul>
+                                <a href="${btnLink}" ${btnLink.startsWith('http') ? 'target="_blank"' : ''} class="neu-btn ${isFeatured ? 'neu-btn-secondary' : ''} btn-bounce" style="${isFeatured ? 'border-color:var(--color-accent);box-shadow:4px 4px 0 var(--color-accent);' : ''}">
+                                    ${item['Teks Tombol'] || 'Pilih Paket'}
+                                </a>
+                            </div>
+                        `;
+                    }).join('');
+
+                    const tutorialBanner = document.querySelector('.tutorial-banner');
+                    if (tutorialBanner) {
+                        if (umum['Banner Layanan Teks']) {
+                            tutorialBanner.style.display = '';
+                            const bannerP = tutorialBanner.querySelector('p');
+                            if (bannerP) bannerP.textContent = umum['Banner Layanan Teks'];
+                            const bannerA = tutorialBanner.querySelector('.neu-btn');
+                            if (bannerA) {
+                                bannerA.textContent = umum['Banner Layanan Tombol Teks'] || 'Buka Tutorial';
+                                bannerA.href = umum['Banner Layanan Tombol Link'] || '#';
+                            }
+                        } else {
+                            tutorialBanner.style.display = 'none';
+                        }
+                    }
+                    secLayanan.style.display = '';
+                } else {
+                    secLayanan.style.display = 'none';
+                }
+            }
+
+            // Tab Alur Kerja
+            const secAlur = document.getElementById('alur');
+            const workflowGrid = document.querySelector('.workflow-grid');
+            if (secAlur && workflowGrid) {
+                if (data['Alur Kerja'] && data['Alur Kerja'].length > 0) {
+                    workflowGrid.innerHTML = data['Alur Kerja'].map((item, idx) => {
+                        const delay = idx * 120;
+                        return `
+                            <div class="step-card reveal" style="transition-delay: ${delay}ms;">
+                                <div class="step-number">${item['No Langkah'] || (idx + 1)}</div>
+                                <h4>${item['Judul'] || ''}</h4>
+                                <p style="font-size:0.95rem;">${item['Deskripsi'] || ''}</p>
+                            </div>
+                        `;
+                    }).join('');
+                    secAlur.style.display = '';
+                } else {
+                    secAlur.style.display = 'none';
+                }
+            }
+
+            // Tab Testimoni
+            const secTesti = document.getElementById('testimoni');
+            const testiStage = document.getElementById('testiStage');
+            if (secTesti && testiStage) {
+                if (data.Testimoni && data.Testimoni.length > 0) {
+                    testiStage.innerHTML = data.Testimoni.map((item, idx) => `
+                        <div class="testi-card" data-tidx="${idx}">
+                            <span class="testi-cut-line"></span>
+                            <img class="testi-photo" src="${item['Link Foto'] || 'https://i.ibb.co.com/LDvtynMK/profile-pic-dummy.webp'}" onerror="this.src='https://i.ibb.co.com/LDvtynMK/profile-pic-dummy.webp'" alt="${item['Nama Client']}">
+                            <p class="testi-quote">&ldquo;${item['Isi Testimoni'] || ''}&rdquo;</p>
+                            <p class="testi-attr">&mdash; ${item['Nama Client'] || ''}, ${item['Jabatan'] || ''}</p>
+                        </div>
+                    `).join('');
+                    secTesti.style.display = '';
+                    initTestimonialCarousel();
+                } else {
+                    secTesti.style.display = 'none';
+                }
+            }
+
+            // Tab FAQ
+            const secFaq = document.getElementById('faq');
+            const faqContainer = document.querySelector('.faq-container');
+            if (secFaq && faqContainer) {
+                if (data.FAQ && data.FAQ.length > 0) {
+                    const titleHtml = umum['Judul Section FAQ'] ? `<h2 class="section-title">${umum['Judul Section FAQ']}</h2>` : `<h2 class="section-title">Pertanyaan Umum</h2>`;
+                    faqContainer.innerHTML = titleHtml + data.FAQ.map(item => `
+                        <details class="faq-item">
+                            <summary class="faq-summary">${item['Pertanyaan'] || ''}</summary>
+                            <div class="faq-content">
+                                ${item['Jawaban'] || ''}
+                            </div>
+                        </details>
+                    `).join('');
+                    secFaq.style.display = '';
+                    initFaqAccordion();
+                } else {
+                    secFaq.style.display = 'none';
+                }
+            }
+
+            // Dynamic Navbar Links visibility
+            const sections = ['keunggulan', 'portofolio', 'testimoni', 'layanan', 'alur', 'faq'];
+            sections.forEach(id => {
+                const sec = document.getElementById(id);
+                const isHidden = !sec || sec.style.display === 'none' || sec.classList.contains('hidden');
+                
+                // Cari semua link ke section ini (baik desktop nav maupun mobile menu)
+                const links = document.querySelectorAll(`a[href="#${id}"]`);
+                links.forEach(link => {
+                    if (isHidden) {
+                        link.style.setProperty('display', 'none', 'important');
+                    } else {
+                        link.style.removeProperty('display');
+                    }
+                });
+            });
+
+            // Re-render Lucide Icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            // Re-observe reveal elements
+            const newReveals = document.querySelectorAll('.reveal');
+            newReveals.forEach(el => revealObs.observe(el));
+            const newCardReveals = document.querySelectorAll('.card-reveal');
+            newCardReveals.forEach(el => cardRevealObserver.observe(el));
+        }
+
+        // ===== INITIAL STATICS TRIGGER =====
+        initHeroSlider();
+        initPortfolioCarousel();
+        initTestimonialCarousel();
+        initFaqAccordion();
+
+        // ===== FETCH SPREADSHEET HYDRATION =====
+        if (GAS_URL && GAS_URL !== "") {
+            const cacheBustedUrl = GAS_URL + (GAS_URL.includes('?') ? '&' : '?') + '_=' + Date.now();
+            fetch(cacheBustedUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error('Network status error');
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Successfully hydrated from Google Sheets API!', data);
+                    hydrateWebsite(data);
+                })
+                .catch(error => {
+                    console.error('Spreadsheet loading failed, utilizing pre-rendered fallback content:', error);
+                });
+        }
+    </script>
+</body>
+</html>

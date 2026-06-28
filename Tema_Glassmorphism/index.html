@@ -1,0 +1,2200 @@
+﻿<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Produk Digital</title>
+    <!-- Dynamic Meta Tags -->
+    <meta name="description" content="Toko Produk Digital">
+    <meta name="keywords" content="produk digital, template">
+    <meta property="og:title" content="Toko Produk Digital">
+    <meta property="og:description" content="Toko Produk Digital">
+    <meta property="og:image" content="">
+    <link rel="icon" href="data:," id="favicon">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Light Theme Defaults */
+            --color-bg: #ffffff;
+            --color-surface: #f8fafc;
+            --color-text: #1e293b;
+            --color-text-muted: #64748b;
+            --color-accent: #0284c7;
+            --color-secondary: #38bdf8;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        html.dark {
+            /* Dark Theme Defaults */
+            --color-bg: #0a1645;
+            --color-surface: #0d1f5c;
+            --color-text: #ffffff;
+            --color-text-muted: #94a3b8;
+            --color-accent: #0eeef7;
+            --color-secondary: #126bdd;
+            --border-color: rgba(255,255,255,0.1);
+            --card-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+        }
+
+        /* Clean Main Scrollbar */
+        html {
+            scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 999px;
+            border: 3px solid var(--color-bg);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-text-muted);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'DM Sans', sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        html, body {
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            width: 100%;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Syne', sans-serif;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.5;
+            padding-top: 70px; /* Offset for fixed navbar */
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Utility Classes */
+        .text-accent { color: var(--color-accent); }
+        .bg-accent { background-color: var(--color-accent); color: var(--color-bg); }
+        .text-center { text-align: center; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mt-8 { margin-top: 2rem; }
+        .hidden { display: none !important; }
+
+        /* Button Component */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.2s;
+            gap: 0.5rem;
+        }
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: #000;
+            box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+        }
+        html.dark .btn-primary {
+            box-shadow: 0 0 15px var(--color-accent);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-outline {
+            border: 1px solid var(--color-accent);
+            color: var(--color-accent);
+        }
+        .btn-outline:hover {
+            background-color: var(--color-accent);
+            color: var(--color-bg);
+        }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            background-color: var(--color-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+        .progress-bar-container {
+            width: 200px;
+            height: 4px;
+            background-color: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: var(--color-accent);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .bouncing-dots span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--color-accent);
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .bouncing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .bouncing-dots span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Navbar & Navigation Menu */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(var(--color-bg), 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+            z-index: 1001; /* Ensure above mobile menu */
+        }
+        .logo-img {
+            height: 40px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--color-text);
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--color-accent);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover {
+            color: var(--color-accent);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1001;
+        }
+        .cart-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -8px;
+            background-color: var(--color-accent);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 10px;
+            min-width: 18px;
+            text-align: center;
+        }
+        .theme-toggle {
+            font-size: 1.5rem;
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        #hero {
+            padding: 80px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center if no image */
+            flex-direction: column; /* Default column for no image */
+            gap: 40px;
+        }
+        #hero.has-image .hero-container {
+            flex-direction: row; /* Desktop row */
+        }
+        .hero-image-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        .hero-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .hero-content {
+            flex: 1;
+            text-align: center; /* Default center */
+        }
+        #hero.has-image .hero-content {
+            text-align: left;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--color-text), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        #hero.has-image .hero-subtitle {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 60px;
+        }
+        #hero.has-image .hero-stats {
+            justify-content: flex-start;
+        }
+        .stat-item h3 {
+            font-size: 2rem;
+            color: var(--color-accent);
+        }
+        .stat-item p {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Info Section */
+        #info {
+            padding: 60px 0;
+            background-color: var(--color-surface);
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .info-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .info-content p {
+            color: var(--color-text-muted);
+            margin-bottom: 15px;
+        }
+        .order-steps {
+            background-color: var(--color-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+        }
+        .order-steps h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        /* Benefit Section */
+        #benefit {
+            padding: 60px 0;
+            scroll-margin-top: 80px; /* Offset for anchor scroll */
+        }
+        .benefit-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+        .benefit-card {
+            background-color: var(--color-surface);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s;
+            flex: 1 1 280px;
+            max-width: 380px;
+            width: 100%;
+        }
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        .benefit-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--color-accent);
+        }
+        .benefit-card p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Bonus Section */
+        #bonus {
+            padding: 40px 0;
+            scroll-margin-top: 80px;
+        }
+        .bonus-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+        .bonus-item {
+            display: block;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: var(--color-surface);
+            border: 1px solid var(--border-color);
+            
+            /* FIXED WIDTH - Ini akan mencegah gambar rata kiri jika jumlahnya sedikit */
+            width: 300px; 
+            max-width: 100%;
+        }
+        .bonus-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(14, 238, 247, 0.2);
+            border-color: var(--color-accent);
+        }
+        .bonus-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            /* Rasio asli tetap terjaga otomatis karena height: auto */
+        }
+
+        /* Services Section */
+        #services {
+            padding: 80px 0;
+            scroll-margin-top: 80px;
+        }
+        .controls-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .search-wrapper {
+            width: 100%;
+            position: relative;
+        }
+        .search-bar {
+            width: 100%;
+            max-width: 100%;
+            padding: 12px 40px 12px 20px;
+            border-radius: 999px;
+            border: 1px solid var(--border-color);
+            background-color: var(--color-surface);
+            color: var(--color-text);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .search-bar:focus {
+            border-color: var(--color-accent);
+        }
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            fill: var(--color-text-muted);
+            pointer-events: none;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        /* Trick to make flex items justify correctly without stretching the last row */
+        .tabs::after {
+            content: "";
+            flex: 10;
+        }
+        .tab-btn {
+            flex: 1 1 auto;
+            text-align: center;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background-color: var(--color-surface);
+            border: 1px solid var(--border-color);
+            color: var(--color-text);
+            font-weight: 500;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .tab-btn.active {
+            background-color: var(--color-accent);
+            color: #000;
+            border-color: var(--color-accent);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        /* Product Card */
+        .product-card {
+            background-color: var(--color-surface);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            animation: fadeUp 0.5s ease backwards;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(14, 238, 247, 0.2);
+            border-color: var(--color-accent);
+        }
+        .product-card-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+        .badge.terlaris { background-color: #ef4444; color: white; }
+        .badge.promo { background-color: #eab308; color: black; }
+        .badge.baru { background-color: #22c55e; color: white; }
+
+        .product-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-jenis {
+            font-size: 0.8rem;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        .product-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        .product-desc-short {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        .read-more {
+            color: var(--color-accent);
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .price-container {
+            margin-bottom: 15px;
+        }
+        .price-coret {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            text-decoration: line-through;
+            margin-bottom: 2px;
+            display: block;
+        }
+        .price-main {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+        .satuan {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            font-weight: normal;
+        }
+        .stock-indicator {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .stock-indicator::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .stock-tersedia::before { background-color: #22c55e; box-shadow: 0 0 5px #22c55e; }
+        .stock-segera::before { background-color: #eab308; box-shadow: 0 0 5px #eab308; }
+        .stock-habis::before { background-color: #ef4444; box-shadow: 0 0 5px #ef4444; }
+        
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .card-actions .btn {
+            flex: 1;
+            padding: 0.6rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+        .page-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            background-color: var(--color-surface);
+            border: 1px solid var(--border-color);
+            transition: 0.3s;
+            min-width: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .page-btn:hover:not(:disabled) {
+            background-color: var(--color-accent);
+            color: #000;
+        }
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Testimonials Marquee */
+        #testimonials {
+            padding: 80px 0;
+            background-color: var(--color-surface);
+            overflow: hidden;
+            scroll-margin-top: 80px;
+        }
+        .marquee-wrapper {
+            overflow-x: auto;
+            padding-bottom: 15px;
+        }
+        .testi-grid {
+            display: flex;
+            gap: 24px;
+            width: max-content;
+            animation: marquee 80s linear infinite; /* EVEN SLOWER */
+        }
+        .testi-grid.paused {
+            animation-play-state: paused;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 12px)); }
+        }
+        .testi-card {
+            background-color: var(--color-bg);
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            width: 350px;
+            flex-shrink: 0;
+            white-space: normal;
+        }
+        .stars { color: #eab308; margin-bottom: 10px; }
+        .testi-content { font-style: italic; margin-bottom: 15px; color: var(--color-text-muted); }
+        .testi-author { font-weight: bold; }
+        .testi-platform { font-size: 0.8rem; color: var(--color-accent); }
+
+        /* FAQ Section */
+        #faq {
+            padding: 80px 0;
+            scroll-margin-top: 80px;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            overflow: hidden;
+        }
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--color-accent);
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        .faq-answer {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease;
+            color: var(--color-text-muted);
+        }
+        .faq-answer > div {
+            overflow: hidden;
+        }
+        .faq-item.active .faq-answer {
+            grid-template-rows: 1fr;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-surface);
+            padding: 40px 0 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .footer-brand-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        .footer-logo {
+            height: 40px;
+            width: auto;
+            border-radius: 8px;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--color-bg);
+            border: 1px solid var(--border-color);
+            transition: 0.3s;
+        }
+        .social-link:hover {
+            background-color: var(--color-accent);
+        }
+        .social-link img {
+            width: 20px;
+            height: 20px;
+            filter: invert(1);
+        }
+        html.light .social-link img { filter: none; }
+        html.light .social-link:hover img { filter: invert(1); }
+
+        /* Cart Drawer */
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            backdrop-filter: blur(4px);
+        }
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background-color: var(--color-bg);
+            z-index: 1002;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+            max-width: 100vw;
+        }
+        .cart-drawer.active {
+            right: 0;
+        }
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .cart-item-info { flex-grow: 1; padding-right: 15px; }
+        .cart-item-title { font-weight: bold; margin-bottom: 5px; }
+        .cart-item-price { color: var(--color-accent); font-weight: 600; margin-bottom: 10px; }
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--color-surface);
+            border-radius: 8px;
+            padding: 4px;
+            width: fit-content;
+        }
+        .qty-btn { padding: 2px 10px; font-weight: bold; }
+        .cart-item-remove {
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+        }
+        .cart-item-remove:hover {
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--color-surface);
+        }
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: var(--color-bg);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transform: translateY(20px);
+            transition: 0.3s;
+            border: 1px solid var(--border-color);
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--color-surface);
+            color: var(--color-text);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            line-height: 1;
+            z-index: 20;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            padding-bottom: 2px;
+        }
+        .modal-close:hover {
+            background-color: #ef4444;
+            color: white;
+            border-color: #ef4444;
+        }
+
+        /* Specific style for promo modal close to stick to image */
+        #promo-popup .modal-content {
+            width: fit-content;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            display: inline-flex;
+        }
+        #promo-popup .modal-close {
+            top: -12px;
+            right: -12px;
+            background-color: #fff;
+            color: #000;
+            border: 2px solid #000;
+        }
+        #promo-popup .modal-close:hover {
+            background-color: #ef4444;
+            color: #fff;
+            border-color: #ef4444;
+        }
+
+        .modal-body-scroll {
+            overflow-y: auto;
+            flex-grow: 1;
+            scrollbar-width: none; /* Firefox */
+        }
+        .modal-body-scroll::-webkit-scrollbar {
+            display: none; /* Chrome */
+        }
+        .modal-footer {
+            padding: 15px 20px;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--color-surface);
+            display: flex;
+            gap: 10px;
+            border-radius: 0 0 16px 16px;
+        }
+        .modal-footer .btn {
+            flex: 1;
+        }
+        .product-modal-images {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 10px;
+            padding: 20px;
+        }
+        .product-modal-images img {
+            width: 100%;
+            border-radius: 8px;
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            object-fit: cover;
+            max-height: 400px;
+            aspect-ratio: 1 / 1;
+        }
+        .product-modal-details { padding: 0 20px 20px; }
+        
+        .promo-img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 16px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Scroll Top */
+        #scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: var(--color-accent);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 990;
+        }
+        #scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) { /* Tablet & Mobile Menu Toggle */
+            .menu-toggle { display: block; }
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%; /* MENU MUNCUL DARI KANAN (RIGHT) */
+                width: 250px;
+                height: calc(100vh - 70px);
+                background-color: var(--color-surface);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+                transition: right 0.3s ease;
+                border-left: 1px solid var(--border-color);
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            .nav-menu.active {
+                right: 0;
+            }
+            .nav-menu li {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .nav-link {
+                display: block;
+                padding: 12px 0;
+                font-size: 1.1rem;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .nav-link::after {
+                display: none; /* Hilangkan animasi underline di mobile */
+            }
+            .nav-link:hover {
+                background: none;
+                padding-left: 10px; /* Efek geser sedikit saat hover di mobile */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .info-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2.5rem; }
+            
+            #hero.has-image .hero-container {
+                flex-direction: column;
+            }
+            #hero.has-image .hero-content {
+                text-align: center;
+            }
+            #hero.has-image .hero-stats {
+                justify-content: center;
+            }
+            .hero-img {
+                max-width: 80%; /* Diperkecil 20% di mobile */
+                max-height: 350px;
+                margin: 0 auto;
+            }
+
+            .cart-drawer {
+                right: 0;
+                top: 100%;
+                width: 100%;
+                height: 80vh;
+                border-radius: 20px 20px 0 0;
+                box-shadow: 0 -5px 25px rgba(0,0,0,0.1);
+            }
+            .cart-drawer.active {
+                top: 20vh;
+            }
+            .hero-stats {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+
+            .footer-brand-wrapper {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    
+        
+        /* Modal & Drawer Background Fix for Readability */
+        .modal-content, .cart-drawer {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            color: var(--color-text) !important;
+        }
+        html.dark .modal-content, html.dark .cart-drawer {
+            background: rgba(15, 23, 42, 0.95) !important;
+        }
+        
+        @media (max-width: 900px) {
+            .nav-menu {
+                background: rgba(255, 255, 255, 0.95) !important;
+                backdrop-filter: blur(20px) !important;
+                -webkit-backdrop-filter: blur(20px) !important;
+            }
+            html.dark .nav-menu {
+                background: rgba(15, 23, 42, 0.95) !important;
+            }
+        }
+
+        /* Desktop Nav Menu Capsule Spacing */
+        @media (min-width: 901px) {
+            .nav-menu {
+                padding: 10px 24px !important;
+                border-radius: 999px !important;
+                gap: 30px !important;
+            }
+        }
+        
+    </style>
+
+    <style>
+        /* OVERRIDE TEMA */
+        
+        body {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%) !important;
+            background-attachment: fixed !important;
+        }
+        html.dark body {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%) !important;
+            background-attachment: fixed !important;
+        }
+        .product-card, .benefit-card, .bonus-item, .testi-card, .order-steps, .modal-content, .cart-drawer, .nav-menu, nav, .search-bar, .tab-btn, .qty-controls {
+            background: rgba(255, 255, 255, 0.2) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1) !important;
+            border-radius: 20px !important;
+        }
+        html.dark .product-card, html.dark .benefit-card, html.dark .bonus-item, html.dark .testi-card, html.dark .order-steps, html.dark .modal-content, html.dark .cart-drawer, html.dark .nav-menu, html.dark nav, html.dark .search-bar, html.dark .tab-btn, html.dark .qty-controls {
+            background: rgba(0, 0, 0, 0.3) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
+        }
+        .btn-primary { 
+            background: rgba(255,255,255,0.4) !important; 
+            backdrop-filter: blur(5px) !important; 
+            border: 1px solid rgba(255,255,255,0.4) !important; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
+        }
+        html.dark .btn-primary { 
+            background: rgba(255,255,255,0.15) !important; 
+            color: white !important;
+        }
+        
+    </style>
+    <script src="./config.js"></script>
+
+    <style>
+        /* MAP */
+        .map-container { position:relative; width:100%; max-width:640px; margin:0 auto; padding-bottom:min(56.25%,360px); height:0; overflow:hidden; border:1px solid var(--border-color); box-shadow:var(--card-shadow); border-radius:16px; }
+        .map-container iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+        .map-text { margin-top:20px; text-align:center; color:var(--color-text-muted); font-size:0.95rem; line-height:1.7; }
+        @media (max-width:600px) { .map-container { max-width:100%; padding-bottom:65%; } }
+        /* MOBILE FILTER */
+        @media (max-width:768px) {
+            .tabs { display:grid !important; grid-template-columns:repeat(3,1fr); gap:6px; }
+            .tab-btn { width:100%; text-align:center; }
+            .tab-btn.filter-hidden { display:none; }
+            .filter-toggle-btn { grid-column:1/-1; background-color:var(--color-surface) !important; }
+        }
+        @media (min-width:769px) { .filter-toggle-btn { display:none; } }
+        /* SCROLL REVEAL */
+        .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.65s cubic-bezier(.16,1,.3,1),transform 0.65s cubic-bezier(.16,1,.3,1); }
+        .reveal.visible { opacity:1; transform:none; }
+        .reveal-d1{transition-delay:.08s} .reveal-d2{transition-delay:.16s} .reveal-d3{transition-delay:.24s}
+        .reveal-d4{transition-delay:.32s} .reveal-d5{transition-delay:.40s} .reveal-d6{transition-delay:.48s}
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="loader-progress"></div>
+        </div>
+        <div class="bouncing-dots">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="logo-container">
+                <img id="nav-logo" src="" alt="Logo" class="logo-img">
+                <span id="nav-brand-name"></span>
+            </a>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="nav-menu">
+                <li id="nav-item-benefit" class="hidden"><a href="#benefit" class="nav-link" id="nav-link-benefit">Kenapa Memilih Kami?</a></li>
+                <li id="nav-item-bonus" class="hidden"><a href="#bonus" class="nav-link">Bonus</a></li>
+                <li id="nav-item-services"><a href="#services" class="nav-link">Katalog Produk</a></li>
+                <li id="nav-item-testimonials" class="hidden"><a href="#testimonials" class="nav-link">Testimoni</a></li>
+                <li id="nav-item-faq" class="hidden"><a href="#faq" class="nav-link">FAQ</a></li>
+                <li id="nav-item-location" class="hidden"><a href="#location" class="nav-link">Lokasi</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-btn" aria-label="Toggle Theme">🌙</button>
+                <button class="cart-btn" id="cart-btn" aria-label="Cart">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </button>
+                <!-- Hamburger Menu for Mobile/Tablet -->
+                <button class="menu-toggle" id="menu-btn" aria-label="Menu">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero">
+        <div class="container hero-container">
+            <!-- Hero Image Wrapper (Kiri di desktop, atas di mobile) -->
+            <div class="hero-image-wrapper hidden" id="hero-image-wrapper">
+                <img src="" id="hero-img" class="hero-img" alt="Hero Image">
+            </div>
+
+            <!-- Hero Content -->
+            <div class="hero-content">
+                <h1 class="hero-title reveal" id="hero-title">Judul Hero</h1>
+                <p class="hero-subtitle reveal reveal-d1" id="hero-subtitle">Subjudul akan muncul di sini</p>
+                <a href="#services" class="btn btn-primary reveal reveal-d2">Lihat Layanan Kami</a>
+                
+                <!-- HERO STATS START -->
+                <div class="hero-stats reveal reveal-d3">
+                    <div class="stat-item">
+                        <h3>10K+</h3>
+                        <p>Order Selesai</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>500+</h3>
+                        <p>Pelanggan Aktif</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>99%</h3>
+                        <p>Tingkat Berhasil</p>
+                    </div>
+                </div>
+                <!-- HERO STATS END -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Info Section -->
+    <section id="info" class="hidden">
+        <div class="container info-grid">
+            <div class="info-content">
+                <h2 class="font-heading" id="info-title">Judul Info</h2>
+                <div id="info-body"></div>
+            </div>
+            <div class="order-steps">
+                <h3 class="font-heading">Cara Order</h3>
+                <div id="info-catatan"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefit Section -->
+    <section id="benefit" class="hidden">
+        <div class="container">
+            <h2 class="font-heading text-center mb-8 reveal" id="benefit-title">Kenapa Memilih Kami?</h2>
+            <div class="benefit-grid" id="benefit-grid">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Bonus Section -->
+    <section id="bonus" class="hidden">
+        <div class="container">
+            <h2 class="font-heading text-center mb-8 reveal">Bonus Eksklusif</h2>
+            <div class="bonus-grid reveal reveal-d1" id="bonus-grid">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="font-heading text-center mb-8 reveal">Katalog Produk</h2>
+            
+            <div class="controls-container">
+                <div class="search-wrapper">
+                    <input type="text" id="search-input" class="search-bar" placeholder="Cari nama produk, jenis...">
+                    <svg class="search-icon" viewBox="0 0 24 24">
+                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </div>
+                <div class="tabs" id="filter-tabs">
+                    <button class="tab-btn active" data-filter="all">Semua</button>
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+
+            <div class="services-grid" id="products-grid">
+                <!-- Skeleton/Products Injected via JS -->
+            </div>
+
+            <div class="pagination" id="pagination">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="hidden">
+        <div class="container">
+            <h2 class="font-heading text-center mb-8 reveal">Apa Kata Mereka?</h2>
+            <div class="marquee-wrapper">
+                <div class="testi-grid" id="testi-grid">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="hidden">
+        <div class="container">
+            <h2 class="font-heading text-center mb-8 reveal">Pertanyaan yang Sering Diajukan</h2>
+            <div class="faq-container" id="faq-list">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </section>
+    <!-- Location Section -->
+    <section id="location" class="hidden">
+        <div class="container">
+            <h2 class="font-heading text-center mb-8 reveal">Lokasi Kami</h2>
+            <div class="map-container reveal">
+                <iframe id="map-iframe" src="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div id="map-text" class="map-text reveal"></div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-brand-wrapper" id="footer-brand-wrapper">
+                <img src="" id="footer-logo" class="footer-logo hidden" alt="Footer Logo">
+                <h2 class="font-heading" id="footer-brand"></h2>
+            </div>
+            <div class="social-links" id="social-links">
+                <!-- Injected via JS -->
+            </div>
+            <p id="footer-text" style="color: var(--color-text-muted); font-size: 0.9rem;">&copy; 2025 Zadigital</p>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h2 class="font-heading">Keranjang Anda</h2>
+            <button id="close-cart" style="font-size: 1.5rem;">&times;</button>
+        </div>
+        <div class="cart-body" id="cart-items">
+            <!-- Items injected via JS -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">Rp 0</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-bottom: 10px;" id="checkout-btn">Pesan Sekarang via WA</button>
+            <button class="btn btn-outline" style="width: 100%;" id="clear-cart-btn">Kosongkan Keranjang</button>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal-overlay" id="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="close-product-modal">&times;</button>
+            <div class="modal-body-scroll">
+                <div class="product-modal-images" id="modal-images"></div>
+                <div class="product-modal-details">
+                    <h2 id="modal-title" class="font-heading mb-4 mt-8">Title</h2>
+                    <div id="modal-desc" style="line-height: 1.6; color: var(--color-text-muted);"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="modal-btn-cart">+ Keranjang</button>
+                <button class="btn btn-primary" id="modal-btn-buy">Beli Sekarang</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Promo Popup -->
+    <div class="modal-overlay" id="promo-popup">
+        <div class="modal-content">
+            <button class="modal-close" id="close-promo">&times;</button>
+            <a href="#" id="promo-link" target="_blank" style="pointer-events: none; width: 100%; display: flex; justify-content: center;">
+                <img src="" id="promo-img" class="promo-img" alt="Promo">
+            </a>
+        </div>
+    </div>
+
+    <!-- Scroll Top -->
+    <button id="scroll-top" aria-label="Scroll to top">↑</button>
+
+    <script>
+        // ============================================================
+        // CONFIG — GAS URL diambil dari config.js (window.GAS_URL)
+        // ============================================================
+
+        // STATE
+        const state = {
+            branding: {},
+            data: [],
+            testimonials: [],
+            faq: [],
+            cart: [],
+            filteredData: [],
+            currentFilter: 'all',
+            searchQuery: '',
+            currentPage: 1,
+            itemsPerPage: 20
+        };
+
+        // UTILS
+        function escapeHTML(str) {
+            if (!str) return '';
+            return String(str).replace(/[&<>'"]/g, tag => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+            }[tag]));
+        }
+
+        function sanitizeHTML(str) {
+            if (!str) return '';
+            let escaped = escapeHTML(str);
+            escaped = escaped.replace(/&lt;br&gt;/gi, '<br>')
+                             .replace(/&lt;b&gt;/gi, '<b>').replace(/&lt;\/b&gt;/gi, '</b>')
+                             .replace(/&lt;i&gt;/gi, '<i>').replace(/&lt;\/i&gt;/gi, '</i>')
+                             .replace(/\n/g, '<br>');
+            return escaped;
+        }
+
+        function formatRupiah(number) {
+            if (number === null || isNaN(number)) return 'Rp 0';
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
+        }
+
+        // INITIALIZATION — fetch dari GAS JSON API
+        async function init() {
+            try {
+                let progress = 10;
+                document.getElementById('loader-progress').style.width = progress + '%';
+
+                if (!window.GAS_URL) throw new Error('GAS_URL tidak ditemukan. Pastikan config.js sudah dimuat.');
+
+                const res = await fetch(window.GAS_URL + '?type=all&_=' + new Date().getTime()).then(r => {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                });
+
+                document.getElementById('loader-progress').style.width = '90%';
+
+                state.branding     = res.branding     || {};
+                state.data         = res.products     || [];
+                state.testimonials = res.testimonials || [];
+                state.faq          = res.faq          || [];
+
+                applyTheme();
+                renderBranding();
+                setupFilters();
+                filterAndRenderData();
+                renderTestimonials();
+                renderFAQ();
+                showPromo();
+                setTimeout(() => initReveal(), 200);
+
+                setTimeout(() => {
+                    const loader = document.getElementById('loading-screen');
+                    loader.style.opacity = '0';
+                    setTimeout(() => loader.style.display = 'none', 500);
+                }, 500);
+
+                const testiGrid = document.getElementById('testi-grid');
+                if (testiGrid) {
+                    testiGrid.addEventListener('click', () => testiGrid.classList.add('paused'));
+                    window.addEventListener('scroll', () => testiGrid.classList.remove('paused'));
+                }
+
+            } catch (error) {
+                console.error('Initialization error:', error);
+                document.getElementById('loading-screen').innerHTML = `
+                    <div style="color:red; text-align:center; padding:20px;">
+                        <h2>Gagal Memuat Data</h2>
+                        <p>${error.message}</p>
+                        <p style="font-size:0.85rem;margin-top:10px;">GAS URL: ${window.GAS_URL||'tidak ada'}</p>
+                        <button onclick="location.reload();" class="btn btn-primary mt-8">Coba Lagi</button>
+                    </div>`;
+            }
+        }
+
+        // RENDER FUNCTIONS
+        function renderBranding() {
+            const b = state.branding;
+            
+            const brandName = b.brand_name ? escapeHTML(b.brand_name) : '';
+            document.title = brandName || 'Toko Produk Digital';
+            document.getElementById('nav-brand-name').textContent = brandName;
+            document.getElementById('footer-brand').textContent = brandName;
+
+            if(b.seo_title) document.title = escapeHTML(b.seo_title);
+            if(b.seo_desc) document.querySelector('meta[name="description"]').setAttribute('content', escapeHTML(b.seo_desc));
+            if(b.seo_keywords) document.querySelector('meta[name="keywords"]').setAttribute('content', escapeHTML(b.seo_keywords));
+            if(b.og_image_url) document.querySelector('meta[property="og:image"]').setAttribute('content', escapeHTML(b.og_image_url));
+            if(b.favicon_url) document.getElementById('favicon').setAttribute('href', escapeHTML(b.favicon_url));
+
+            if(b.logo_url) {
+                const navLogo = document.getElementById('nav-logo');
+                navLogo.src = escapeHTML(b.logo_url);
+                navLogo.style.display = 'block';
+
+                const footLogo = document.getElementById('footer-logo');
+                footLogo.src = escapeHTML(b.logo_url);
+                footLogo.classList.remove('hidden');
+            }
+
+            // Benefit Title Sync (Section & Nav Menu)
+            const benefitTitleStr = b.benefit_title ? escapeHTML(b.benefit_title) : 'Kenapa Memilih Kami?';
+            document.getElementById('benefit-title').textContent = benefitTitleStr;
+            document.getElementById('nav-link-benefit').textContent = benefitTitleStr;
+
+            // Hero Section Setup
+            if(b.hero_title) document.getElementById('hero-title').innerHTML = sanitizeHTML(b.hero_title);
+            if(b.hero_subtitle) document.getElementById('hero-subtitle').innerHTML = sanitizeHTML(b.hero_subtitle);
+            if(b.hero_image) {
+                const imgWrap = document.getElementById('hero-image-wrapper');
+                const imgEl = document.getElementById('hero-img');
+                imgEl.src = escapeHTML(b.hero_image);
+                imgWrap.classList.remove('hidden');
+                document.getElementById('hero').classList.add('has-image');
+            }
+
+            if(b.info_title || b.info_body || b.catatan) {
+                document.getElementById('info').classList.remove('hidden');
+                if(b.info_title) document.getElementById('info-title').textContent = escapeHTML(b.info_title);
+                if(b.info_body) document.getElementById('info-body').innerHTML = sanitizeHTML(b.info_body);
+                if(b.catatan) document.getElementById('info-catatan').innerHTML = sanitizeHTML(b.catatan);
+            }
+
+            let hasBenefit = false;
+            const benefitGrid = document.getElementById('benefit-grid');
+            benefitGrid.innerHTML = '';
+            // Diperbarui menjadi sampai 6
+            for(let i=1; i<=6; i++) {
+                if(b[`benefit_${i}_title`] || b[`benefit_${i}_desc`]) {
+                    hasBenefit = true;
+                    benefitGrid.innerHTML += `
+                        <div class="benefit-card">
+                            <h3>${escapeHTML(b[`benefit_${i}_title`] || '')}</h3>
+                            <p>${sanitizeHTML(b[`benefit_${i}_desc`] || '')}</p>
+                        </div>
+                    `;
+                }
+            }
+            if(hasBenefit) {
+                document.getElementById('benefit').classList.remove('hidden');
+                document.getElementById('nav-item-benefit').classList.remove('hidden');
+            }
+
+            let hasBonus = false;
+            const bonusGrid = document.getElementById('bonus-grid');
+            bonusGrid.innerHTML = '';
+            for(let i=1; i<=3; i++) {
+                if(b[`bonus_${i}`]) {
+                    hasBonus = true;
+                    const linkKey = `bonus_link_${i}`;
+                    const targetLink = b[linkKey] ? escapeHTML(b[linkKey]) : '#';
+                    const targetAttr = b[linkKey] ? 'target="_blank"' : '';
+                    const pointerStyle = !b[linkKey] ? 'style="pointer-events: none;"' : '';
+                    
+                    bonusGrid.innerHTML += `
+                        <a href="${targetLink}" ${targetAttr} class="bonus-item" ${pointerStyle}>
+                            <img src="${escapeHTML(b[`bonus_${i}`])}" alt="Bonus ${i}" class="bonus-img" loading="lazy">
+                        </a>
+                    `;
+                }
+            }
+            if(hasBonus) {
+                document.getElementById('bonus').classList.remove('hidden');
+                document.getElementById('nav-item-bonus').classList.remove('hidden');
+            }
+
+            if(b.footer_text) document.getElementById('footer-text').innerHTML = sanitizeHTML(b.footer_text);
+
+            const socials = ['ig_url', 'tiktok_url', 'youtube_url', 'facebook_url', 'twitter_url', 'telegram_url', 'shopee_url'];
+            const socialLinksDiv = document.getElementById('social-links');
+            socials.forEach(key => {
+                if(b[key]) {
+                    let iconName = key.replace('_url', '');
+                    if(iconName === 'ig') iconName = 'instagram';
+                    socialLinksDiv.innerHTML += `
+                        <a href="${escapeHTML(b[key])}" target="_blank" class="social-link" title="${iconName}">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@9/icons/${iconName}.svg" alt="${iconName}">
+                        </a>
+                    `;
+                }
+            });
+            // Location section
+            if(b.map_link) {
+                const _loc = document.getElementById('location');
+                const _mapIframe = document.getElementById('map-iframe');
+                const _navLoc = document.getElementById('nav-item-location');
+                if(_loc) _loc.classList.remove('hidden');
+                if(_mapIframe) _mapIframe.setAttribute('src', b.map_link);
+                if(_navLoc) _navLoc.classList.remove('hidden');
+            }
+            if(b.map_text) {
+                const _mapTxt = document.getElementById('map-text');
+                if(_mapTxt) _mapTxt.innerHTML = sanitizeHTML(b.map_text);
+            }
+        }
+
+        function applyTheme() {
+            const savedTheme = sessionStorage.getItem('theme') || state.branding.default_mode || 'light';
+            document.documentElement.className = savedTheme;
+            document.getElementById('theme-btn').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+            const root = document.documentElement;
+            const b = state.branding;
+
+            const updateColor = (varName, val) => {
+                if(val) root.style.setProperty(varName, val);
+            }
+
+            if(savedTheme === 'light') {
+                updateColor('--color-bg', b.color_light_bg || b.color_default);
+                updateColor('--color-surface', b.color_light_surface);
+                updateColor('--color-text', b.color_light_text);
+                updateColor('--color-accent', b.color_light_accent || b.color_accent);
+            } else {
+                updateColor('--color-bg', b.color_dark_bg || b.color_default);
+                updateColor('--color-surface', b.color_dark_surface);
+                updateColor('--color-text', b.color_dark_text);
+                updateColor('--color-accent', b.color_dark_accent || b.color_accent);
+            }
+            updateColor('--color-secondary', b.color_secondary);
+        }
+
+        document.getElementById('theme-btn').addEventListener('click', () => {
+            const current = document.documentElement.className;
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            sessionStorage.setItem('theme', newTheme);
+            applyTheme();
+        });
+
+        // Hamburger Menu Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuBtn.textContent = '☰';
+            });
+        });
+
+        function setupFilters() {
+            const tabsDiv = document.getElementById('filter-tabs');
+            const types = new Set();
+            state.data.forEach(item => {
+                if(item.jenis) types.add(item.jenis);
+            });
+
+            Array.from(types).forEach(type => {
+                const btn = document.createElement('button');
+                btn.className = 'tab-btn';
+                btn.dataset.filter = type;
+                btn.textContent = type;
+                tabsDiv.appendChild(btn);
+            });
+
+            // Mobile: collapse buttons beyond 6
+            const allBtns = tabsDiv.querySelectorAll('.tab-btn');
+            if (allBtns.length > 6) {
+                allBtns.forEach((btn, i) => { if(i >= 6) btn.classList.add('filter-hidden'); });
+                const toggleBtn = document.createElement('button');
+                toggleBtn.className = 'tab-btn filter-toggle-btn';
+                toggleBtn.textContent = '+ Lihat Semua';
+                let expanded = false;
+                toggleBtn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    expanded = !expanded;
+                    allBtns.forEach((btn, i) => { if(i >= 6) btn.classList.toggle('filter-hidden', !expanded); });
+                    toggleBtn.textContent = expanded ? '- Tutup' : '+ Lihat Semua';
+                });
+                tabsDiv.appendChild(toggleBtn);
+            }
+
+            tabsDiv.addEventListener('click', e => {
+                if(e.target.classList.contains('tab-btn') && !e.target.classList.contains('filter-toggle-btn')) {
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    state.currentFilter = e.target.dataset.filter;
+                    state.currentPage = 1;
+                    filterAndRenderData();
+                }
+            });
+
+            document.getElementById('search-input').addEventListener('input', e => {
+                state.searchQuery = e.target.value.toLowerCase();
+                state.currentPage = 1;
+                filterAndRenderData();
+            });
+        }
+
+        function filterAndRenderData() {
+            let filtered = state.data;
+
+            if(state.currentFilter !== 'all') {
+                filtered = filtered.filter(i => i.jenis === state.currentFilter);
+            }
+
+            if(state.searchQuery) {
+                const q = state.searchQuery;
+                filtered = filtered.filter(i => 
+                    (i.nama_produk || '').toLowerCase().includes(q) ||
+                    (i.jenis || '').toLowerCase().includes(q) ||
+                    (i.deskripsi_singkat || '').toLowerCase().includes(q)
+                );
+            }
+
+            filtered.sort((a, b) => {
+                const isATerlaris = (a.badge || '').toLowerCase() === 'terlaris';
+                const isBTerlaris = (b.badge || '').toLowerCase() === 'terlaris';
+                if(isATerlaris && !isBTerlaris) return -1;
+                if(!isATerlaris && isBTerlaris) return 1;
+                return 0; 
+            });
+
+            state.filteredData = filtered;
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+
+            const start = (state.currentPage - 1) * state.itemsPerPage;
+            const end = start + state.itemsPerPage;
+            const paginated = state.filteredData.slice(start, end);
+
+            if(paginated.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--color-text-muted);">Tidak ada produk ditemukan.</p>';
+                document.getElementById('pagination').innerHTML = '';
+                return;
+            }
+
+            paginated.forEach((item, index) => {
+                const originalIndex = state.data.indexOf(item);
+                
+                let badgeHtml = '';
+                if(item.badge) {
+                    const badgeClass = item.badge.toLowerCase() === 'terlaris' ? 'terlaris' : 
+                                       item.badge.toLowerCase() === 'promo' ? 'promo' : 'baru';
+                    badgeHtml = `<span class="badge ${badgeClass}">${escapeHTML(item.badge)}</span>`;
+                }
+                
+                let imgHtml = '';
+                if(item.foto_produk_1) {
+                    imgHtml = `<img src="${escapeHTML(item.foto_produk_1)}" alt="${escapeHTML(item.nama_produk || '')}" class="product-card-img" loading="lazy">`;
+                }
+
+                let stockClass = 'stock-tersedia';
+                let isOut = false;
+                if((item.stok || '').toLowerCase() === 'habis') { stockClass = 'stock-habis'; isOut = true; }
+                else if((item.stok || '').toLowerCase() === 'segera') { stockClass = 'stock-segera'; isOut = true; }
+
+                let priceHtml = '';
+                if(item.harga_coret) {
+                    const hcNum = parseInt(String(item.harga_coret).replace(/[^0-9]/g, '')) || 0;
+                    priceHtml += `<span class="price-coret">${formatRupiah(hcNum)}</span>`;
+                }
+                const hNum = parseInt(String(item.harga).replace(/[^0-9]/g, '')) || 0;
+                priceHtml += `<span class="price-main">${formatRupiah(hNum)}</span> <span class="satuan">${escapeHTML(item.satuan || '')}</span>`;
+
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.style.animationDelay = `${index * 0.05}s`;
+                card.innerHTML = `
+                    ${badgeHtml}
+                    ${imgHtml}
+                    <div class="product-content">
+                        <div class="product-jenis">${escapeHTML(item.jenis || '')}</div>
+                        <h3 class="product-title">${escapeHTML(item.nama_produk || '')}</h3>
+                        ${item.deskripsi_singkat ? `<div class="product-desc-short">${escapeHTML(item.deskripsi_singkat)} <span class="read-more" onclick="openProductModal(${originalIndex})">Baca selengkapnya</span></div>` : '<div class="product-desc-short"></div>'}
+                        <div class="price-container">${priceHtml}</div>
+                        ${item.stok ? `<div class="stock-indicator ${stockClass}">${escapeHTML(item.stok)}</div>` : ''}
+                        <div class="card-actions">
+                            <button class="btn btn-outline" onclick="addToCart(${originalIndex}, false)" ${isOut ? 'disabled' : ''}>+ Keranjang</button>
+                            <button class="btn btn-primary" onclick="buyNow(${originalIndex})" ${isOut ? 'disabled' : ''}>Beli Sekarang</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            renderPagination();
+            initReveal();
+        }
+
+        function renderPagination() {
+            const pagDiv = document.getElementById('pagination');
+            pagDiv.innerHTML = '';
+            const totalPages = Math.ceil(state.filteredData.length / state.itemsPerPage);
+            if(totalPages <= 1) return;
+
+            const prev = document.createElement('button');
+            prev.className = 'page-btn';
+            prev.textContent = '«';
+            prev.disabled = state.currentPage === 1;
+            prev.onclick = () => { state.currentPage--; renderProducts(); document.getElementById('services').scrollIntoView(); };
+            pagDiv.appendChild(prev);
+
+            for(let i=1; i<=totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'page-btn';
+                btn.textContent = i;
+                if(state.currentPage === i) {
+                    btn.style.backgroundColor = 'var(--color-accent)';
+                    btn.style.color = '#000';
+                }
+                btn.onclick = () => { state.currentPage = i; renderProducts(); document.getElementById('services').scrollIntoView(); };
+                pagDiv.appendChild(btn);
+            }
+
+            const next = document.createElement('button');
+            next.className = 'page-btn';
+            next.textContent = '»';
+            next.disabled = state.currentPage === totalPages;
+            next.onclick = () => { state.currentPage++; renderProducts(); document.getElementById('services').scrollIntoView(); };
+            pagDiv.appendChild(next);
+        }
+
+        // CART LOGIC
+        function addToCart(index, directCheckout) {
+            const item = state.data[index];
+            const isHideQty = (item.sembunyikan_qty || '').toLowerCase() === 'ya';
+            
+            const existing = state.cart.find(i => i.index === index);
+            if(existing) {
+                if(!isHideQty) existing.qty += 1;
+            } else {
+                state.cart.push({ index, item, qty: 1, isHideQty });
+            }
+            updateCartUI();
+            
+            if(!directCheckout) {
+                openCart();
+            }
+        }
+
+        function buyNow(index) {
+            state.cart = []; 
+            addToCart(index, true);
+            checkout();
+        }
+
+        function updateCartQty(index, delta) {
+            const cartItem = state.cart.find(i => i.index === index);
+            if(cartItem) {
+                cartItem.qty += delta;
+                if(cartItem.qty <= 0) {
+                    state.cart = state.cart.filter(i => i.index !== index);
+                }
+                updateCartUI();
+            }
+        }
+
+        function removeFromCart(index) {
+            state.cart = state.cart.filter(i => i.index !== index);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items');
+            container.innerHTML = '';
+            let total = 0;
+            let count = 0;
+
+            state.cart.forEach(c => {
+                const priceNum = parseInt(String(c.item.harga).replace(/[^0-9]/g, '')) || 0;
+                const subtotal = priceNum * c.qty;
+                total += subtotal;
+                count += c.qty;
+
+                let qtyHtml = c.isHideQty ? 
+                    `<span style="font-size:0.8rem; color:var(--color-text-muted);">1x Akses/Lisensi</span>` : 
+                    `<div class="qty-controls">
+                        <button class="qty-btn" onclick="updateCartQty(${c.index}, -1)">-</button>
+                        <span>${c.qty}</span>
+                        <button class="qty-btn" onclick="updateCartQty(${c.index}, 1)">+</button>
+                    </div>`;
+
+                container.innerHTML += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${escapeHTML(c.item.nama_produk)}</div>
+                            <div class="cart-item-price">${formatRupiah(subtotal)}</div>
+                            ${qtyHtml}
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart(${c.index})">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+            });
+
+            if(state.cart.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:var(--color-text-muted); margin-top: 50px;">Keranjang kosong.</p>';
+            }
+
+            document.getElementById('cart-total-price').textContent = formatRupiah(total);
+            const badge = document.getElementById('cart-count');
+            badge.textContent = count;
+            badge.style.display = count > 0 ? 'block' : 'none';
+        }
+
+        function checkout() {
+            if(state.cart.length === 0) return;
+            
+            const b = state.branding;
+            let msg = `${b.wa_greeting || 'Halo, saya ingin order:'}\n\n`;
+            let total = 0;
+
+            state.cart.forEach((c, idx) => {
+                const priceNum = parseInt(String(c.item.harga).replace(/[^0-9]/g, '')) || 0;
+                const subtotal = priceNum * c.qty;
+                total += subtotal;
+                const qtyText = c.isHideQty ? '' : ` x${c.qty}`;
+                msg += `${idx + 1}. ${c.item.nama_produk}${qtyText} = ${formatRupiah(subtotal)}\n`;
+            });
+
+            msg += `\n*Total: ${formatRupiah(total)}*\n\nMohon konfirmasi ketersediaan. Terima kasih!`;
+
+            const waNum = (b.wa_number || '').replace(/[^0-9]/g, '');
+            if(!waNum) {
+                alert("Nomor WhatsApp belum diatur oleh pemilik toko.");
+                return;
+            }
+
+            const url = `https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+
+        // CART DRAWER
+        const cartDrawer = document.getElementById('cart-drawer');
+        const drawerOverlay = document.getElementById('drawer-overlay');
+        
+        function openCart() {
+            cartDrawer.classList.add('active');
+            drawerOverlay.classList.add('active');
+        }
+        function closeCart() {
+            cartDrawer.classList.remove('active');
+            drawerOverlay.classList.remove('active');
+        }
+
+        document.getElementById('cart-btn').addEventListener('click', openCart);
+        document.getElementById('close-cart').addEventListener('click', closeCart);
+        drawerOverlay.addEventListener('click', closeCart);
+        document.getElementById('clear-cart-btn').addEventListener('click', () => { state.cart = []; updateCartUI(); });
+        document.getElementById('checkout-btn').addEventListener('click', checkout);
+
+        // PRODUCT MODAL
+        const prodModal = document.getElementById('product-modal');
+        function openProductModal(index) {
+            const item = state.data[index];
+            document.getElementById('modal-title').textContent = item.nama_produk;
+            document.getElementById('modal-desc').innerHTML = sanitizeHTML(item.deskripsi || item.deskripsi_singkat);
+            
+            const imagesDiv = document.getElementById('modal-images');
+            imagesDiv.innerHTML = '';
+            for(let i=1; i<=3; i++) {
+                if(item[`foto_produk_${i}`]) {
+                    imagesDiv.innerHTML += `<img src="${escapeHTML(item[`foto_produk_${i}`])}" loading="lazy">`;
+                }
+            }
+            imagesDiv.style.display = imagesDiv.innerHTML ? 'flex' : 'none';
+            
+            // Setup buttons in footer
+            const isOut = (item.stok || '').toLowerCase() === 'habis';
+            const btnCart = document.getElementById('modal-btn-cart');
+            const btnBuy = document.getElementById('modal-btn-buy');
+            btnCart.disabled = isOut;
+            btnBuy.disabled = isOut;
+            btnCart.onclick = () => {
+                prodModal.classList.remove('active');
+                addToCart(index, false);
+            };
+            btnBuy.onclick = () => {
+                prodModal.classList.remove('active');
+                buyNow(index);
+            };
+
+            prodModal.classList.add('active');
+        }
+        document.getElementById('close-product-modal').addEventListener('click', () => prodModal.classList.remove('active'));
+        prodModal.addEventListener('click', e => { if(e.target === prodModal) prodModal.classList.remove('active'); });
+
+        // TESTIMONIALS
+        function renderTestimonials() {
+            const grid = document.getElementById('testi-grid');
+            if(state.testimonials.length === 0) return;
+            
+            document.getElementById('testimonials').classList.remove('hidden');
+            document.getElementById('nav-item-testimonials').classList.remove('hidden');
+            
+            let html = '';
+            state.testimonials.forEach(t => {
+                let starsHtml = '';
+                const starCount = parseInt(t.bintang) || 5;
+                for(let i=0; i<starCount; i++) starsHtml += '★';
+
+                html += `
+                    <div class="testi-card">
+                        <div class="stars">${starsHtml}</div>
+                        <div class="testi-content">"${escapeHTML(t.isi)}"</div>
+                        <div class="testi-author">${escapeHTML(t.nama)}</div>
+                        ${t.platform_order ? `<div class="testi-platform">via ${escapeHTML(t.platform_order)}</div>` : ''}
+                    </div>
+                `;
+            });
+            
+            if(state.testimonials.length > 2) {
+                grid.innerHTML = html + html;
+            } else {
+                grid.innerHTML = html;
+                grid.style.animation = 'none';
+                grid.style.width = '100%';
+                grid.style.justifyContent = 'center';
+            }
+        }
+
+        // FAQ
+        function renderFAQ() {
+            const list = document.getElementById('faq-list');
+            if(state.faq.length === 0) return;
+            
+            document.getElementById('faq').classList.remove('hidden');
+            document.getElementById('nav-item-faq').classList.remove('hidden');
+
+            state.faq.forEach((f, index) => {
+                const item = document.createElement('div');
+                item.className = `faq-item reveal reveal-d${Math.min(index+1,6)}`;
+                item.innerHTML = `
+                    <button class="faq-question">${escapeHTML(f.pertanyaan || f.question || '')}</button>
+                    <div class="faq-answer"><div><div style="padding-top:15px; padding-bottom:10px;">${sanitizeHTML(f.jawaban || f.answer || '')}</div></div></div>
+                `;
+                item.querySelector('.faq-question').addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+                list.appendChild(item);
+            });
+            initReveal();
+        }
+
+        // PROMO POPUP
+        function showPromo() {
+            const b = state.branding;
+            if(b.pop_up && !sessionStorage.getItem('promo_shown')) {
+                const popup = document.getElementById('promo-popup');
+                const img = document.getElementById('promo-img');
+                const link = document.getElementById('promo-link');
+                
+                img.src = b.pop_up;
+                if(b.pop_up_link) {
+                    link.href = b.pop_up_link;
+                    link.style.pointerEvents = 'auto';
+                }
+                
+                setTimeout(() => popup.classList.add('active'), 2000);
+                sessionStorage.setItem('promo_shown', 'true');
+            }
+        }
+        document.getElementById('close-promo').addEventListener('click', () => document.getElementById('promo-popup').classList.remove('active'));
+
+        // SCROLL TOP
+        const scrollBtn = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 300) scrollBtn.classList.add('visible');
+            else scrollBtn.classList.remove('visible');
+        });
+        scrollBtn.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+        // SCROLL REVEAL
+        function initReveal() {
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+                });
+            }, { threshold: 0.12 });
+            document.querySelectorAll('.reveal:not(.visible)').forEach(el => obs.observe(el));
+        }
+
+        // INIT
+        window.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+</html>

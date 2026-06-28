@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Taul StaticWeb - Website Etalase Bisnis Profesional 100k. Langsung jadi, tanpa ribet.">
+    <meta name="keywords" content="promo website, website murah, etalase digital, Taul StaticWeb">
+    
+    <!-- Open Graph / WhatsApp Thumbnail -->
+    <meta property="og:title" content="Paket Ekspres Website Profesional">
+    <meta property="og:description" content="Website Sendiri. Bukan Nebeng Platform Orang. Kelola produk & harga langsung dari HP tanpa coding.">
+    <meta property="og:type" content="website">
+    
+    <title>Promo Website Bisnis - Taul StaticWeb</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-default: #0a1645;
+            --color-accent: #0eeef7;
+            --color-secondary: #126bdd;
+            --color-light-bg: #f0f4ff;
+            --color-light-surface: #ffffff;
+            --color-dark-bg: #0a1645;
+            --color-dark-text: #0eeef7;
+            --color-red: #ff3b30;
+            
+            --border-width: 3px;
+            --shadow-offset: 5px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-light-bg);
+            color: var(--color-default);
+            line-height: 1.6;
+            padding-bottom: 90px; /* Space for sticky button */
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 600px; /* Disesuaikan untuk fokus ads mobile/desktop ramping */
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- UTILITIES NEUBRUTALISM --- */
+        .neu-box {
+            background: var(--color-light-surface);
+            border: var(--border-width) solid var(--color-default);
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-default);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .neu-btn {
+            display: block;
+            width: 100%;
+            background: var(--color-accent);
+            color: var(--color-default);
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-decoration: none;
+            text-align: center;
+            padding: 16px 24px;
+            border: var(--border-width) solid var(--color-default);
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-default);
+            border-radius: 8px;
+            transition: all 0.1s ease;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .neu-btn:active {
+            transform: translate(var(--shadow-offset), var(--shadow-offset));
+            box-shadow: 0 0 0 var(--color-default);
+        }
+
+        section { padding: 60px 0; }
+
+        /* --- HERO --- */
+        .hero {
+            background: var(--color-dark-bg);
+            color: var(--color-light-surface);
+            text-align: center;
+            border-bottom: var(--border-width) solid var(--color-default);
+            padding-top: 80px;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 0 var(--color-secondary);
+        }
+        .hero h2 {
+            font-size: 1.8rem;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+            background: var(--color-default);
+            display: inline-block;
+            padding: 5px 15px;
+            border: 2px solid var(--color-accent);
+            transform: rotate(-2deg);
+        }
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* --- PAIN POINT --- */
+        .pain-point {
+            background: #ffe5e5;
+            border-bottom: var(--border-width) solid var(--color-default);
+        }
+        .pain-point h3 {
+            font-size: 1.8rem;
+            color: var(--color-red);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 900;
+            text-shadow: 2px 2px 0 var(--color-default);
+        }
+        .cross-list { list-style: none; }
+        .cross-list li {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            background: var(--color-light-surface);
+            border: 2px solid var(--color-default);
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 3px 3px 0 var(--color-red);
+        }
+
+        /* --- AGITATE --- */
+        .agitate {
+            background: var(--color-secondary);
+            color: var(--color-light-surface);
+            text-align: center;
+            border-bottom: var(--border-width) solid var(--color-default);
+        }
+        .quote-box {
+            font-size: 1.3rem;
+            font-weight: 800;
+            border: 3px solid var(--color-default);
+            padding: 20px;
+            background: var(--color-accent);
+            color: var(--color-default);
+            box-shadow: 6px 6px 0 var(--color-default);
+            transform: rotate(1deg);
+        }
+
+        /* --- SOLUSI --- */
+        .solusi h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .check-item {
+            background: var(--color-light-surface);
+            border: 3px solid var(--color-default);
+            padding: 15px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            box-shadow: 4px 4px 0 var(--color-accent);
+            display: flex;
+            gap: 10px;
+        }
+
+        /* --- SHOWCASE THEMES (HORIZONTAL SCROLL) --- */
+        .showcase {
+            background: var(--color-dark-bg);
+            color: var(--color-light-surface);
+            border-top: var(--border-width) solid var(--color-default);
+            border-bottom: var(--border-width) solid var(--color-default);
+            padding: 60px 0 80px; /* Extra padding for scroll bar */
+            overflow: hidden;
+        }
+        .showcase h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--color-accent);
+        }
+        
+        .theme-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            padding: 20px 0;
+        }
+        
+        @media (min-width: 600px) {
+            .theme-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .theme-card {
+            background: var(--color-light-surface);
+            color: var(--color-default);
+            border: var(--border-width) solid var(--color-default);
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-accent);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .theme-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background-color: #e2e8f0;
+            border: 2px solid var(--color-default);
+            border-radius: 4px;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .theme-card h3 {
+            font-size: 1.2rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        /* Tombol V1-V4 dalam Card */
+        .version-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        .v-btn {
+            display: block;
+            text-align: center;
+            padding: 8px;
+            border: 2px solid var(--color-default);
+            color: var(--color-default);
+            font-weight: 800;
+            text-decoration: none;
+            border-radius: 4px;
+            box-shadow: 2px 2px 0 var(--color-default);
+            font-size: 0.9rem;
+            /* Background akan di-override secara inline sesuai instruksi warna v1-v4 */
+        }
+        .v-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0 0 0 var(--color-default);
+        }
+
+        /* --- PRICING --- */
+        .pricing-box {
+            text-align: center;
+            animation: bounceRotate 2s infinite;
+        }
+        @keyframes bounceRotate {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) rotate(-1deg);}
+            40% {transform: translateY(-10px) rotate(-1deg);}
+            60% {transform: translateY(-5px) rotate(-1deg);}
+        }
+        .price-coret {
+            font-size: 1.5rem;
+            text-decoration: line-through;
+            font-weight: 900;
+            color: var(--color-red);
+        }
+        .price-final {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--color-default);
+            line-height: 1;
+            margin: 10px 0 20px;
+            text-shadow: 4px 4px 0 var(--color-accent);
+        }
+
+        /* --- STICKY CTA --- */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: var(--color-light-surface);
+            border-top: var(--border-width) solid var(--color-default);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+        }
+        .sticky-cta .neu-btn {
+            max-width: 300px;
+            padding: 12px 20px;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* Teks putih terang untuk dark button jika warna background V gelap */
+        .text-light { color: white !important; }
+
+        @media (min-width: 769px) {
+            .theme-card {
+                transform: scale(1) !important;
+                opacity: 1 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Website Bisnis Profesional.</h1>
+            <h2>Rp 100.000. Langsung Jadi.</h2>
+            <p>Kelola produk & harga langsung dari HP tanpa coding, tanpa ribet.</p>
+            <a href="#solusi" class="neu-btn" style="background: var(--color-accent);">🛒 Lihat Benefit</a>
+        </div>
+    </section>
+
+    <section class="pain-point">
+        <div class="container">
+            <h3>Masih Gini?</h3>
+            <ul class="cross-list">
+                <li>❌ Ngasih pricelist masih pakai foto atau teks manual</li>
+                <li>❌ Mau punya website tapi takut mahal & ribet</li>
+                <li>❌ Pernah coba WordPress pusing sendiri</li>
+                <li>❌ Nggak ada waktu belajar coding</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="agitate">
+        <div class="container">
+            <div class="quote-box">
+                "Banyak UMKM kehilangan pembeli bukan karena produknya jelek tapi karena toko online mereka tidak meyakinkan."
+            </div>
+            <p style="margin-top: 20px; font-weight: 600;">Solusi yang ada? Mahal. Teknis. Atau ada biaya langganan bulanan selamanya.</p>
+        </div>
+    </section>
+
+    <section id="solusi" class="solusi">
+        <div class="container">
+            <h2>Website Profesional.<br>Dikelola 100% dari HP.</h2>
+            
+            <div class="check-item">✅ Edit produk & harga langsung dari Panel Admin</div>
+            <div class="check-item">✅ Checkout via WhatsApp pembeli pesan, langsung closing</div>
+            <div class="check-item">✅ Popup promo otomatis saat toko dibuka</div>
+            <div class="check-item">✅ Disesuaikan dengan brandingmu</div>
+            <div class="check-item">✅ Tidak ada biaya bulanan selamanya</div>
+        </div>
+    </section>
+
+    <!-- THEME SHOWCASE (VERTICAL GRID) -->
+    <section class="showcase">
+        <div class="container" style="max-width: 900px;">
+            <h2>Pilih Tema Website</h2>
+            
+            <div class="theme-grid" id="theme-grid">
+                
+                <!-- TEMA 1: CLEAN MODERN -->
+                <div class="theme-card">
+                    <img src="https://i.ibb.co.com/b5SJv6Tx/clean.webp" alt="Clean Modern" class="theme-img">
+                    <h3>Clean Modern</h3>
+                    <p style="font-size:0.85rem; text-align:center; margin-bottom: 20px;">Bersih & terpercaya. Cocok untuk semua jenis produk.</p>
+                    <a href="./Tema_Clean_Modern/index.html" class="neu-btn" style="background: #0eeef7; font-size: 0.9rem; padding: 12px;">👀 Lihat Demo</a>
+                </div>
+
+                <!-- TEMA 2: NEUBRUTALISM -->
+                <div class="theme-card">
+                    <img src="https://i.ibb.co.com/VWxY3xSw/neu.webp" alt="Neubrutalism" class="theme-img">
+                    <h3>Neubrutalism</h3>
+                    <p style="font-size:0.85rem; text-align:center; margin-bottom: 20px;">Bold & unik. Cocok untuk fashion, lifestyle, F&B.</p>
+                    <a href="./Tema_Neubrutalism/index.html" class="neu-btn" style="background: #0eeef7; font-size: 0.9rem; padding: 12px;">🚀 Lihat Demo</a>
+                </div>
+
+                <!-- TEMA 3: GLASSMORPHISM -->
+                <div class="theme-card">
+                    <img src="https://i.ibb.co.com/32r93gG/glass.webp" alt="Glassmorphism" class="theme-img">
+                    <h3>Glassmorphism</h3>
+                    <p style="font-size:0.85rem; text-align:center; margin-bottom: 20px;">Premium & futuristik. Cocok untuk beauty, wellness.</p>
+                    <a href="./Tema_Glassmorphism/index.html" class="neu-btn" style="background: #0eeef7; font-size: 0.9rem; padding: 12px;">💎 Lihat Demo</a>
+                </div>
+
+                <!-- TEMA 4: TECH DARK -->
+                <div class="theme-card">
+                    <img src="https://i.ibb.co.com/xt81Zhw2/dark.webp" alt="Tech Dark" class="theme-img">
+                    <h3>Tech Dark</h3>
+                    <p style="font-size:0.85rem; text-align:center; margin-bottom: 20px;">Elegan & modern. Cocok untuk elektronik, otomotif.</p>
+                    <a href="./Tema_Tech_Dark/index.html" class="neu-btn" style="background: #0eeef7; font-size: 0.9rem; padding: 12px;">🌑 Lihat Demo</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="harga">
+        <div class="container">
+            <div class="neu-box pricing-box">
+                <div class="price-coret">Rp 700.000</div>
+                <div class="price-final">Rp 100.000</div>
+                <p style="font-weight: 800; font-size: 1.2rem; margin-bottom: 20px;">Toko Sendiri. Bukan Nebeng Platform Orang.</p>
+                
+                <!-- INPUT REQUIRED: Ganti nomor WA -->
+                <a href="https://wa.me/6283834048345?text=Halo%20Taul StaticWeb,%20saya%20mau%20pesan%20Website%20Promo%20100k" class="neu-btn" style="background: #25D366; color: white;">✅ Pesan Sekarang</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ / OBJECTION -->
+    <section style="background: var(--color-default); color: white;">
+        <div class="container" style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="align-self: flex-start; max-width: 85%; background: var(--color-light-surface); color: var(--color-default); padding: 15px 20px; border-radius: 20px 20px 20px 0; border: 3px solid var(--color-accent); font-weight: 800; font-size: 1.1rem; box-shadow: 4px 4px 0 var(--color-accent);">
+                "Saya belum pernah punya website..."
+            </div>
+            
+            <div style="align-self: flex-end; max-width: 85%; background: var(--color-secondary); color: white; padding: 15px 20px; border-radius: 20px 20px 0 20px; border: 3px solid var(--color-dark-bg); font-weight: 600; box-shadow: -4px 4px 0 rgba(0,0,0,0.5);">
+                Justru pas. Tim kami urus semua dari nol. Kamu cukup sediakan logo dan data produk. Sisanya terima beres!
+            </div>
+        </div>
+    </section>
+
+    <!-- STICKY BUTTON -->
+    <div class="sticky-cta">
+        <a href="https://wa.me/6283834048345?text=Halo%20Taul StaticWeb,%20saya%20mau%20pesan%20Website%20Promo%20100k" class="neu-btn">
+            ✅ Pesan Sekarang
+        </a>
+    </div>
+
+    <!-- Horizontal scroll script removed -->
+</body>
+</html>
